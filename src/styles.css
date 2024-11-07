@@ -25,3 +25,6 @@ html, body {
   height: 100%; /* Set the height of html and body to 100% */
   margin: 0; /* Remove default margin */
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

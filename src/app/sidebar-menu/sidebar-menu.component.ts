@@ -27,6 +27,14 @@ export class SidebarMenuComponent {
         {
           id: 'menu-bills-expunging',
           name: '账单删除任务'
+        },
+        {
+          id: 'menu-bills-live-broadcast',
+          name: '直播账单'
+        },
+        {
+          id: 'menu-bills-logs',
+          name: '操作日志'  // 账单和授权日志
         }
       ]
     },
@@ -38,6 +46,36 @@ export class SidebarMenuComponent {
         {
           id: 'menu-expenses-items',
           name: '费用项'
+        }
+      ]
+    },
+    {
+      id: 'menu-utilities',
+      name: '实用工具',
+      expanded: false,
+      subfuncs: [
+        {
+          id: 'menu-utilities-guidance',
+          name: '文章语法指导'
+        },
+        {
+          id: 'menu-utilities-gen-insert-into',
+          name: 'INSERT-INTO 生成器'
+        }
+      ]
+    },
+    {
+      id: 'menu-others',
+      name: '其他',
+      expanded: false,
+      subfuncs: [
+        {
+          id: 'menu-others-declarations',
+          name: '开源组件声明'
+        },
+        {
+          id: 'menu-others-about',
+          name: '关于'
         }
       ]
     }

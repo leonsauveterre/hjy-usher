@@ -1,3 +1,7 @@
+app-code-display {
+  min-height: 280px;
+}
+
 .code-toolbar {
   position: relative;
   width: 100%;

@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Inject, Input, PLATFORM_ID } from '@angular/core';
-import * as Prism from 'prismjs';
 import { isPlatformBrowser, NgIf } from '@angular/common';
+import * as Prism from 'prismjs';
 
 import 'prismjs/plugins/line-numbers/prism-line-numbers.js';
 import 'prismjs/components/prism-java';
