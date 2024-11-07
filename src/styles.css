@@ -1,0 +1,27 @@
+@import "prismjs/themes/prism.css";
+@import "prismjs/plugins/line-numbers/prism-line-numbers.css";
+
+.rotate-arrow {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
+}
+
+.sidebar div {
+  transition: background-color 0.3s;
+}
+
+.sidebar div:hover {
+  background-color: #e9ecef;
+  border-radius: 4px;
+}
+
+.subfunc-item:hover {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+/* Ensure the body takes full height */
+html, body {
+  height: 100%; /* Set the height of html and body to 100% */
+  margin: 0; /* Remove default margin */
+}

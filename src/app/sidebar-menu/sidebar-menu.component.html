@@ -1,0 +1,24 @@
+<div class="sidebar bg-light border-end vh-100 p-3" style="width: 250px; float: left">
+  <h5 class="mb-4 text-primary">Modules Available</h5>
+  <ul class="list-unstyled">
+    <li *ngFor="let func of funcs" class="mb-2">
+      <div class="fw-bold py-2 ps-2 d-flex align-items-center"
+           (click)="toggleExpand(func)"
+           style="cursor: pointer;">
+        {{ func.name }}
+        <span
+          class="ms-auto text-secondary"
+          [ngClass]="{'rotate-arrow': func.expanded}"
+        >&#9662;</span>
+      </div>
+      <ul *ngIf="func.expanded" class="list-unstyled ps-3">
+        <li *ngFor="let subfunc of func.subfuncs"
+            (click)="onAnyOfMenuClick(subfunc)"
+            class="py-1 ps-2 subfunc-item"
+            style="cursor: pointer;">
+          {{ subfunc.name }}
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>

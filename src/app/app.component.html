@@ -1,0 +1,25 @@
+<main class="main">
+  <div class="top-banner">
+    <img ngSrc="/img/logo-merged.png" alt="Logo" height="291" width="884"/>
+    <div class="top-banner-content">
+      <div class="top-banner-text">
+        <span class="top-banner-text-main">Welcome to HJY Usher</span><br>
+        <span class="top-banner-text-sub">Feel free to read, edit, compose, and share your ideas across numerous teams!</span>
+      </div>
+      <button class="banner-button" (click)="navigateToHomepage()" title="Return to homage to Family Guy">🏠︎ Homepage</button>
+      <button class="banner-button" (click)="openEmailDraft()" title="Try interacting with WeCom">❓ Report a Problem</button>
+      <button class="banner-button" (click)="toggleDarkMode()" title="An experimental tryout with darkmode-js">
+        {{ darkModeActive ? '🌖 Return to Bright Mode' : '🌒 Dark Mode (Beta)' }}
+      </button>
+    </div>
+  </div>
+  <div class="layout">
+    <!-- Left Sidebar -->
+    <app-sidebar-menu class="sidebar"></app-sidebar-menu>
+
+    <!-- Right Content -->
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</main>

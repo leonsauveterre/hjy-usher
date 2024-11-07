@@ -1,0 +1,21 @@
+<div class="bienvenue">
+  <div class="left-section">
+    <img src="../img/family-guy-1920-1080.webp" alt="Welcome back, dear trailblazer!">
+  </div>
+  <div class="right-section">
+    <h2 class="tip-title">💡 Tip of the Day</h2>
+    <div class="tip-box">
+      <p>MySQL 可通过 <code>MATCH.. AGAINST..</code> 进行自然语言搜索，以代替传统低效的 <code>LIKE '%XX%'</code>。例如：</p>
+      <pre class="language-sql"><code>SELECT *
+FROM articles
+WHERE MATCH(title, body)
+  AGAINST('reference'
+    IN NATURAL LANGUAGE MODE);</code></pre>
+      <p>这样，只要 <code>title</code> 或 <code>body</code> 字段带有 "reference" 这个单词（不区分大小写，不能拆词），该项就会加入结果集并返回。</p>
+      <p>MySQL 还支持 BOOLEAN MODE、QUERY EXPANSION、Stopwords 等，详见官方文档。</p>
+    </div>
+  </div>
+</div>
+<footer>
+  <p>&copy; 2024 Leon Zhao. Proudly created for trailblazers and those who took the road less traveled by.</p>
+</footer>
