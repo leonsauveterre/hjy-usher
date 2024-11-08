@@ -15,8 +15,8 @@
 .blog-sub-title {
   margin-top: 0;
   margin-bottom: 35px;
-  color: #000000;
-  font-size: 18px;
+  color: #838383;
+  font-size: 15px;
   text-align: center !important;
 }
 
@@ -94,7 +94,23 @@
   border-radius: 6px;
   background: linear-gradient(to right, #508068, #b9ddca);
   color: white;
+  font-weight: bold;
   padding: 5px 5px 5px 15px;
+}
+
+.blog-question-body {
+  line-height: 2.0;
+  color: #043a25;
+  font-size: 15px;
+}
+
+.blog-warning-small {
+  border-radius: 6px;
+  border: 1px solid #ffbee5;
+  background: #ffecf2;
+  color: #6c0031;
+  padding: 6px;
+  margin-top: -15px;
 }
 
 .blog-deprecation {
@@ -112,6 +128,7 @@
   display: flex;
   justify-content: center; /* Optional: Centers the table horizontally in the container */
   padding: 10px 10px 10px 20px;
+  margin-bottom: 15px;
 }
 
 .blog-cond-border {

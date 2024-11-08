@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Inject, Input, PLATFORM_ID } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Inject, Input, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, NgIf } from '@angular/common';
 import * as Prism from 'prismjs';
 
@@ -20,12 +20,21 @@ export class CodeDisplayComponent implements AfterViewInit {
   @Input() language: string = 'java';
   copied: boolean = false;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(private cdr: ChangeDetectorRef, @Inject(PLATFORM_ID) private platformId: Object) {
   }
 
   ngAfterViewInit(): void {
+    this.rerender();
+  }
+
+  rerender(): void {
     if (isPlatformBrowser(this.platformId)) {
-      Prism.highlightAll();
+      this.cdr.detectChanges();
+      const codeElement = document.getElementsByTagName('code')[0];
+      const preElement = codeElement.parentElement as HTMLElement;
+      preElement.classList.add('line-numbers');
+      codeElement.textContent = this.code;
+      Prism.highlightElement(codeElement);
     }
   }
 
