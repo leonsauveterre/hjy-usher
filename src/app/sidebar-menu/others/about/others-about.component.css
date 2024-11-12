@@ -1,0 +1,63 @@
+@font-face {
+  font-family: 'RontokCintane';
+  src: url('/font/rontokcintane-jpw4a.ttf') format('truetype');
+}
+
+.about-signature {
+  font-family: 'RontokCintane', sans-serif;
+  font-size: 62px;
+  font-weight: bolder;
+  text-align: right;
+  line-height: 50px;
+  padding-right: 18px;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+h1 {
+  color: #0056b3;
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.about-text {
+  font-size: 20px;
+  color: #333;
+}
+
+p {
+  margin-bottom: 16px;
+}
+
+.about-quote {
+  font-style: italic;
+  color: #555;
+  text-align: center;
+  font-size: 18px;
+  border-left: 5px solid #0056b3;
+  padding-left: 5px;
+  margin: 20px 20px;
+}
+
+.about-closing {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #0056b3;
+}
+
+.about-highlight {
+  border: 2px dashed #52c552;
+  border-radius: 5px;
+  background: #e3ffe3;
+  padding: 5px;
+  margin: 0 4px 0 4px;
+}

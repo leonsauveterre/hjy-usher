@@ -1,0 +1,21 @@
+<div id="blog-bills-expunging-container" class="blog-container mx-auto">
+  <div style="background-image: url('/img/merry-christmas-horizontal-upper.jpg'); height: 60px; width: 100%; background-position-y: 1625px"></div>
+  <div class="blog-title">账单删除任务</div>
+  <div style="background-image: url('/img/merry-christmas-horizontal-lower.jpg'); height: 60px; width: 100%"></div>
+  <div class="blog-sub-title">Leon Zhao | zhaoliang03&#64;huice.com, Nov 12, 2024<br>Last updated at: 18:33:52 (UTC+8), Nov 12, 2024</div>
+  <div class="blog-paragraph">
+    <div class="blog-header-1">1 概述</div>
+    <div class="blog-text-normal">账单删除任务是为了应对用户错误导入数据而产生的，它可以删除用户导入的原始单及所有相关数据表（如标准单、分摊结果、日月汇总等）。和手动拉取任务一样，所有需要删除的条目都需要记录、排队，等待调度器逐个执行。</div>
+    <div class="blog-text-normal">为了尽量减少数据删除过程中可能产生的干扰，当有导入记录处于删除中状态时，禁止用户导入新文件；反之亦成立。</div>
+  </div>
+  <div class="blog-paragraph">
+    <div class="blog-header-1">2 任务结构</div>
+    <div class="blog-header-2">2.1 任务表</div>
+    <div class="blog-text-normal">
+      <span class="blog-highlight-compact">MySQL</span>
+      <span class="blog-highlight-canary">bill_import_delayed_deletion</span>
+    </div>
+  </div>
+</div>
+<div class="blog-end">(THE END)</div>
+<div class="blog-end-line"></div>

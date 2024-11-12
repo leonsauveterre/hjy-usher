@@ -1,12 +1,14 @@
 <div id="blog-bills-manual-container" class="blog-container mx-auto">
+  <div style="background-image: url('/img/merry-christmas-horizontal-upper.jpg'); height: 60px; width: 100%; background-position-y: 1625px"></div>
   <div class="blog-title">手动拉取任务</div>
-  <div class="blog-sub-title">Leon Zhao | zhaoliang03&#64;huice.com, Nov 06, 2024<br>Last updated at: 19:04:56 (UTC+8), Nov 08, 2024</div>
-  <div class="blog-part">
+  <div style="background-image: url('/img/merry-christmas-horizontal-lower.jpg'); height: 60px; width: 100%"></div>
+  <div class="blog-sub-title">Leon Zhao | zhaoliang03&#64;huice.com, Nov 06, 2024<br>Last updated at: 16:26:22 (UTC+8), Nov 12, 2024</div>
+  <div class="blog-paragraph">
     <div class="blog-header-1">1 概述</div>
     <div class="blog-text-normal">手动拉取任务是为了弥补系统拉取任务没有拉取到的数据而诞生的，不适用于大量任务创建，也不能保证数据一定会补拉到，只是给用户提供手动拉取账单的入口，需要用户自行保证数据完整。</div>
-    <div class="blog-text-normal">由于手动拉取任务可能随时出现，其调用次数比较频繁，因此有时会出现限流或平台内部错误等问题，属正常现象。对于未知错误，任务将给用户返回统一提示：<span class="blog-highlight-cyan">当前拉取任务异常</span>。其他信息详见下方。</div>
+    <div class="blog-text-normal">由于手动拉取任务可能随时出现，其调用次数比较频繁，因此有时会出现限流或平台内部错误等问题，属正常现象。对于未知错误，任务将给用户返回统一提示：<span class="blog-highlight-navy">当前拉取任务异常</span>。其他信息详见下方。</div>
   </div>
-  <div class="blog-part">
+  <div class="blog-paragraph">
     <div class="blog-header-1">2 任务结构</div>
     <div class="blog-header-2">2.1 任务表</div>
     <div class="blog-text-normal">任务表1
@@ -30,12 +32,12 @@
         <tr>
           <td>pull_start</td>
           <td>DATE</td>
-          <td>要拉取账单的开始日期，格式：<span class="blog-highlight-cyan">yyyy-MM-dd</span></td>
+          <td>要拉取账单的开始日期，格式：<span class="blog-highlight-navy">yyyy-MM-dd</span></td>
         </tr>
         <tr>
           <td>pull_end</td>
           <td>DATE</td>
-          <td>要拉取账单的结束日期，格式：<span class="blog-highlight-cyan">yyyy-MM-dd</span></td>
+          <td>要拉取账单的结束日期，格式：<span class="blog-highlight-navy">yyyy-MM-dd</span></td>
         </tr>
         <tr>
           <td>task_status</td>
@@ -101,7 +103,7 @@
         <tr>
           <td>main_id</td>
           <td>BIGINT</td>
-          <td>来自主表的<span class="blog-highlight-cyan">id</span>字段</td>
+          <td>来自主表的<span class="blog-highlight-navy">id</span>字段</td>
         </tr>
         <tr>
           <td>verified_at</td>
@@ -120,9 +122,8 @@
         </tr>
       </tbody>
     </table>
-    <div class="blog-paragraph-break"></div>
     <div class="blog-question-title">🤨 为什么会有两张表？</div>
-    <div class="alert alert-success blog-question-body">🙋‍♂️ 历史遗留问题。初版需求中，只需要主表记录任务信息，但由于拉取任务只能按天拉取，因此极有可能拉取时间很长，且只能记录任务总状态，无法准确记录每个日期拉取情况，且研发无法取消其中某几条任务。后来，主表只记录用户在页面上创建的任务，子表会记录具体每个子任务的状态。例如，主表中用户发起快手账单补拉任务，日期范围为 10 月 1 日到 10 月 15 日，假设此任务 id 为 606，那么子表中会入库 15 条数据，每项的 <span class="blog-highlight-cyan">pull_start</span> 和 <span class="blog-highlight-cyan">pull_end</span> 为同一日期，即将 15 天的任务拆成 15 个子任务，这些任务的 <span class="blog-highlight-cyan">main_id</span> 均为 606。待任务完成后，子表中的 <span class="blog-highlight-cyan">new_count</span> 和 <span class="blog-highlight-cyan">org_count</span> 相减即为新补拉来的账单数，而主表任何字段的值都永远不变。</div>
+    <div class="alert alert-success blog-question-body">🙋‍♂️ 历史遗留问题。初版需求中，只需要主表记录任务信息，但由于拉取任务只能按天拉取，因此极有可能拉取时间很长，且只能记录任务总状态，无法准确记录每个日期拉取情况，且研发无法取消其中某几条任务。后来，主表只记录用户在页面上创建的任务，子表会记录具体每个子任务的状态。例如，主表中用户发起快手账单补拉任务，日期范围为 10 月 1 日到 10 月 15 日，假设此任务 id 为 606，那么子表中会入库 15 条数据，每项的 <span class="blog-highlight-navy">pull_start</span> 和 <span class="blog-highlight-navy">pull_end</span> 为同一日期，即将 15 天的任务拆成 15 个子任务，这些任务的 <span class="blog-highlight-navy">main_id</span> 均为 606。待任务完成后，子表中的 <span class="blog-highlight-navy">new_count</span> 和 <span class="blog-highlight-navy">org_count</span> 相减即为新补拉来的账单数，而主表任何字段的值都永远不变。</div>
     <div class="blog-header-2">2.2 字段枚举</div>
     <div class="blog-text-normal"><span class="blog-highlight-canary">pull_type</span></div>
     <table class="table table-striped table-bordered">
@@ -147,7 +148,7 @@
         </tr>
         <tr>
           <td>22</td>
-          <td>京东优惠券（此时该任务一定配有 <span class="blog-highlight-cyan">pull_type</span> 为 21 的任务，配比 1:1）</td>
+          <td>京东优惠券（此时该任务一定配有 <span class="blog-highlight-navy">pull_type</span> 为 21 的任务，配比 1:1）</td>
         </tr>
         <tr>
           <td>30</td>
@@ -311,14 +312,14 @@
         </tr>
         <tr>
           <td>当前拉取任务异常</td>
-          <td>通用异常信息，说明程序遇到了未知问题，需要通过日志和子表的 <span class="blog-highlight-cyan">reserved_field4</span> 排查</td>
+          <td>通用异常信息，说明程序遇到了未知问题，需要通过日志和子表的 <span class="blog-highlight-navy">reserved_field4</span> 排查。原有提示语包含一句“请稍后重试”，导致许多用户仍在资源枯竭的情况下创建任务，研发不得不手动更新成任务失败，因此该句已被删掉</td>
         </tr>
       </tbody>
     </table>
   </div>
-  <div class="blog-part">
-    <div class="blog-header-1">3 常见问题排查</div>
-    <div class="blog-header-2">3.1 查看任务信息</div>
+  <div class="blog-paragraph">
+    <div class="blog-header-1">3 相关数据交互及问题排查</div>
+    <div class="blog-header-2">3.1 特定任务信息查询</div>
     <div class="blog-text-normal"><span class="blog-highlight-canary">按条件查询任务</span></div>
     <div class="mt-3" id="bills-manual-input-3-1-select-1">
       <div class="d-flex align-items-center input-group-prepend">
@@ -329,122 +330,10 @@
       <div class="blog-cond-container">
         <table class="blog-cond-border">
           <tbody>
-          <tr>
-            <td>
-              <input class="form-check-input" type="checkbox" id="manual-bills-select-1-cb1" _fieldName="id" checked />
-              <label class="form-check-label ms-1" for="manual-bills-select-1-cb1">id</label>
-            </td>
-            <td>
-              <input class="form-check-input" type="checkbox" id="manual-bills-select-1-cb2" _fieldName="main_id" checked />
-              <label class="form-check-label ms-1" for="manual-bills-select-1-cb2">main_id</label>
-            </td>
-            <td>
-              <input class="form-check-input" type="checkbox" id="manual-bills-select-1-cb3" _fieldName="tenant_id" checked />
-              <label class="form-check-label ms-1" for="manual-bills-select-1-cb3">tenant_id</label>
-            </td>
-            <td>
-              <input class="form-check-input" type="checkbox" id="manual-bills-select-1-cb4" _fieldName="platform_id" checked />
-              <label class="form-check-label ms-1" for="manual-bills-select-1-cb4">platform_id</label>
-            </td>
-            <td>
-              <input class="form-check-input" type="checkbox" id="manual-bills-select-1-cb5" _fieldName="shop_id" checked />
-              <label class="form-check-label ms-1" for="manual-bills-select-1-cb5">shop_id</label>
-            </td>
-            <td>
-              <input class="form-check-input" type="checkbox" id="manual-bills-select-1-cb6" _fieldName="account_id" checked />
-              <label class="form-check-label ms-1" for="manual-bills-select-1-cb6">account_id</label>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <input class="form-check-input" type="checkbox" id="manual-bills-select-1-cb7" _fieldName="account_no" checked />
-              <label class="form-check-label ms-1" for="manual-bills-select-1-cb7">account_no</label>
-            </td>
-            <td>
-              <input class="form-check-input" type="checkbox" id="manual-bills-select-1-cb8" _fieldName="pull_type" checked />
-              <label class="form-check-label ms-1" for="manual-bills-select-1-cb8">pull_type</label>
-            </td>
-            <td>
-              <input class="form-check-input" type="checkbox" id="manual-bills-select-1-cb9" _fieldName="pull_start" checked />
-              <label class="form-check-label ms-1" for="manual-bills-select-1-cb9">pull_start</label>
-            </td>
-            <td>
-              <input class="form-check-input" type="checkbox" id="manual-bills-select-1-cb10" _fieldName="pull_end" checked />
-              <label class="form-check-label ms-1" for="manual-bills-select-1-cb10">pull_end</label>
-            </td>
-            <td>
-              <input class="form-check-input" type="checkbox" id="manual-bills-select-1-cb11" _fieldName="task_status" checked />
-              <label class="form-check-label ms-1" for="manual-bills-select-1-cb11">task_status</label>
-            </td>
-            <td>
-              <input class="form-check-input" type="checkbox" id="manual-bills-select-1-cb12" _fieldName="org_count" checked />
-              <label class="form-check-label ms-1" for="manual-bills-select-1-cb12">org_count</label>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <input class="form-check-input" type="checkbox" id="manual-bills-select-1-cb13" _fieldName="new_count" checked />
-              <label class="form-check-label ms-1" for="manual-bills-select-1-cb13">new_count</label>
-            </td>
-            <td>
-              <input class="form-check-input" type="checkbox" id="manual-bills-select-1-cb14" _fieldName="new_count - org_count AS increment" checked />
-              <label class="form-check-label ms-1" for="manual-bills-select-1-cb14">increment (Calculated)</label>
-            </td>
-            <td>
-              <input class="form-check-input" type="checkbox" id="manual-bills-select-1-cb15" _fieldName="created_at" checked />
-              <label class="form-check-label ms-1" for="manual-bills-select-1-cb15">created_at</label>
-            </td>
-            <td>
-              <input class="form-check-input" type="checkbox" id="manual-bills-select-1-cb16" _fieldName="started_at" checked />
-              <label class="form-check-label ms-1" for="manual-bills-select-1-cb16">started_at</label>
-            </td>
-            <td>
-              <input class="form-check-input" type="checkbox" id="manual-bills-select-1-cb17" _fieldName="completed_at" checked />
-              <label class="form-check-label ms-1" for="manual-bills-select-1-cb17">completed_at</label>
-            </td>
-            <td>
-              <input class="form-check-input" type="checkbox" id="manual-bills-select-1-cb18" _fieldName="verified_at" />
-              <label class="form-check-label ms-1" for="manual-bills-select-1-cb18">verified_at</label>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <input class="form-check-input" type="checkbox" id="manual-bills-select-1-cb19" _fieldName="proof" />
-              <label class="form-check-label ms-1" for="manual-bills-select-1-cb19">proof</label>
-            </td>
-            <td>
-              <input class="form-check-input" type="checkbox" id="manual-bills-select-1-cb20" _fieldName="registrar" />
-              <label class="form-check-label ms-1" for="manual-bills-select-1-cb20">registrar</label>
-            </td>
-            <td>
-              <input class="form-check-input" type="checkbox" id="manual-bills-select-1-cb21" _fieldName="failure_reason" checked />
-              <label class="form-check-label ms-1" for="manual-bills-select-1-cb21">failure_reason</label>
-            </td>
-            <td>
-              <input class="form-check-input" type="checkbox" id="manual-bills-select-1-cb22" _fieldName="remark" />
-              <label class="form-check-label ms-1" for="manual-bills-select-1-cb22">remark</label>
-            </td>
-            <td>
-              <input class="form-check-input" type="checkbox" id="manual-bills-select-1-cb23" _fieldName="reserved_field1" />
-              <label class="form-check-label ms-1" for="manual-bills-select-1-cb23">reserved_field1</label>
-            </td>
-            <td>
-              <input class="form-check-input" type="checkbox" id="manual-bills-select-1-cb24" _fieldName="reserved_field2" />
-              <label class="form-check-label ms-1" for="manual-bills-select-1-cb24">reserved_field2</label>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <input class="form-check-input" type="checkbox" id="manual-bills-select-1-cb25" _fieldName="reserved_field3" />
-              <label class="form-check-label ms-1" for="manual-bills-select-1-cb25">reserved_field3</label>
-            </td>
-            <td>
-              <input class="form-check-input" type="checkbox" id="manual-bills-select-1-cb26" _fieldName="reserved_field4" />
-              <label class="form-check-label ms-1" for="manual-bills-select-1-cb26">reserved_field4</label>
-            </td>
-            <td>
-              <input class="form-check-input" type="checkbox" id="manual-bills-select-1-cb27" _fieldName="reserved_field5" />
-              <label class="form-check-label ms-1" for="manual-bills-select-1-cb27">reserved_field5</label>
+          <tr *ngFor="let cond of manual0301Select01">
+            <td *ngFor="let f of cond">
+              <input class="form-check-input" type="checkbox" [id]="f.id" [attr._fieldName]="f.fieldName" [checked]="f.checked" />
+              <label class="form-check-label ms-1" [for]="f.id">{{ f.label }}</label>
             </td>
           </tr>
           </tbody>
@@ -466,62 +355,10 @@
       <div class="blog-cond-container">
         <table class="blog-cond-border">
           <tbody>
-            <tr>
-              <td>
-                <input class="form-check-input" type="checkbox" id="manual-bills-cond-2-cb1" _pullType="10" />
-                <label class="form-check-label ms-1" for="manual-bills-cond-2-cb1">支付宝</label>
-              </td>
-              <td>
-                <input class="form-check-input" type="checkbox" id="manual-bills-cond-2-cb2" _pullType="20" />
-                <label class="form-check-label ms-1" for="manual-bills-cond-2-cb2">京东货款流水</label>
-              </td>
-              <td>
-                <input class="form-check-input" type="checkbox" id="manual-bills-cond-2-cb3" _pullType="21" />
-                <label class="form-check-label ms-1" for="manual-bills-cond-2-cb3">京东货款流水（包括优惠券）</label>
-              </td>
-              <td>
-                <input class="form-check-input" type="checkbox" id="manual-bills-cond-2-cb4" _pullType="30" />
-                <label class="form-check-label ms-1" for="manual-bills-cond-2-cb4">京东钱包</label>
-              </td>
-              <td>
-                <input class="form-check-input" type="checkbox" id="manual-bills-cond-2-cb5" _pullType="40" />
-                <label class="form-check-label ms-1" for="manual-bills-cond-2-cb5">抖店货款</label>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <input class="form-check-input" type="checkbox" id="manual-bills-cond-2-cb6" _pullType="50" />
-                <label class="form-check-label ms-1" for="manual-bills-cond-2-cb6">快手小店货款</label>
-              </td>
-              <td>
-                <input class="form-check-input" type="checkbox" id="manual-bills-cond-2-cb7" _pullType="60" />
-                <label class="form-check-label ms-1" for="manual-bills-cond-2-cb7">京准通</label>
-              </td>
-              <td>
-                <input class="form-check-input" type="checkbox" id="manual-bills-cond-2-cb8" _pullType="120" />
-                <label class="form-check-label ms-1" for="manual-bills-cond-2-cb8">快手超售后期</label>
-              </td>
-              <td>
-                <input class="form-check-input" type="checkbox" id="manual-bills-cond-2-cb9" _pullType="130" />
-                <label class="form-check-label ms-1" for="manual-bills-cond-2-cb9">快手安心钱包</label>
-              </td>
-              <td>
-                <input class="form-check-input" type="checkbox" id="manual-bills-cond-2-cb10" _pullType="140" />
-                <label class="form-check-label ms-1" for="manual-bills-cond-2-cb10">视频号资金流水</label>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <input class="form-check-input" type="checkbox" id="manual-bills-cond-2-cb11" _pullType="160" />
-                <label class="form-check-label ms-1" for="manual-bills-cond-2-cb11">小红书订单货款</label>
-              </td>
-              <td>
-                <input class="form-check-input" type="checkbox" id="manual-bills-cond-2-cb12" _pullType="170" />
-                <label class="form-check-label ms-1" for="manual-bills-cond-2-cb12">小红书其他服务款</label>
-              </td>
-              <td>
-                <input class="form-check-input" type="checkbox" id="manual-bills-cond-2-cb13" _pullType="180" />
-                <label class="form-check-label ms-1" for="manual-bills-cond-2-cb13">小红书人工调账</label>
+            <tr *ngFor="let cond of manual0301Cond02">
+              <td *ngFor="let f of cond">
+                <input class="form-check-input" type="checkbox" [id]="f.id" [attr._pullType]="f.pullType" />
+                <label class="form-check-label ms-1" [for]="f.id">{{ f.label }}</label>
               </td>
             </tr>
           </tbody>
@@ -535,26 +372,10 @@
       <div class="blog-cond-container">
         <table class="blog-cond-border">
           <tbody>
-            <tr>
-              <td>
-                <input class="form-check-input" type="radio" id="manual-bills-cond-3-rd1" name="manual-bills-cond-3" _taskStatus="all" checked="checked" />
-                <label class="form-check-label ms-1" for="manual-bills-cond-3-rd1">所有状态</label>
-              </td>
-              <td>
-                <input class="form-check-input" type="radio" id="manual-bills-cond-3-rd2" name="manual-bills-cond-3" _taskStatus="10" />
-                <label class="form-check-label ms-1" for="manual-bills-cond-3-rd2">待执行</label>
-              </td>
-              <td>
-                <input class="form-check-input" type="radio" id="manual-bills-cond-3-rd3" name="manual-bills-cond-3" _taskStatus="25" />
-                <label class="form-check-label ms-1" for="manual-bills-cond-3-rd3">分摊中</label>
-              </td>
-              <td>
-                <input class="form-check-input" type="radio" id="manual-bills-cond-3-rd4" name="manual-bills-cond-3" _taskStatus="30" />
-                <label class="form-check-label ms-1" for="manual-bills-cond-3-rd4">已完成</label>
-              </td>
-              <td>
-                <input class="form-check-input" type="radio" id="manual-bills-cond-3-rd5" name="manual-bills-cond-3" _taskStatus="80" />
-                <label class="form-check-label ms-1" for="manual-bills-cond-3-rd4">任务异常</label>
+            <tr *ngFor="let cond of manual0301Cond03">
+              <td *ngFor="let f of cond">
+                <input class="form-check-input" type="radio" [id]="f.id" name="manual-bills-cond-3" [attr._taskStatus]="f.taskStatus" [checked]="f.checked" />
+                <label class="form-check-label ms-1" [for]="f.id">{{ f.label }}</label>
               </td>
             </tr>
           </tbody>
@@ -591,5 +412,38 @@
       <button id="bills-manual-input-3-1-trigger" type="button" class="btn btn-success" (click)="genSQLS03E01()">🤹 Generate SQL</button>
     </div>
     <app-code-display #codeResult0301 id="bills-manual-input-3-1-result" [code]="generatedSQL0301" language="sql"></app-code-display>
+    <div class="blog-header-2">3.2 总体任务信息查询</div>
+    <div class="blog-text-normal"><span class="blog-highlight-canary">未完成任务总数（按租户分组）</span></div>
+    <app-code-display #codeResult0302A id="bills-manual-input-3-2-result-A" [code]="generatedSQL0302A" language="sql"></app-code-display>
+    <div class="blog-paragraph-break"></div>
+    <div class="blog-text-normal"><span class="blog-highlight-canary">未完成任务总数（按租户、任务类型分组）</span></div>
+    <app-code-display #codeResult0302B id="bills-manual-input-3-2-result-B" [code]="generatedSQL0302B" language="sql"></app-code-display>
+    <div class="blog-paragraph-break"></div>
+    <div class="blog-text-normal"><span class="blog-highlight-canary">未完成任务总数（按租户、任务类型、任务状态分组）</span></div>
+    <app-code-display #codeResult0302C id="bills-manual-input-3-2-result-C" [code]="generatedSQL0302C" language="sql"></app-code-display>
+    <div class="blog-header-2">3.3 常见问题及解决方案</div>
+    <div class="blog-header-3">3.3.1 任务迟迟无法开始执行</div>
+    <div class="blog-text-normal">1️⃣ 若任务状态始终为 <span class="blog-highlight-navy">待执行</span>，先利用 #3.2 中的 SQL 语句查询待执行的任务总共有多少，以及是否时刻存在状态为 <span class="blog-highlight-navy">21</span> 的任务。若是，则说明任务正在排队，需要耐心等待；若不是，继续阅读。</div>
+    <div class="blog-text-normal">2️⃣ 由于每天上午是系统任务大量执行的时间段，大部分手动任务从 <span class="blog-highlight-navy">9 AM</span> 一直到 <span class="blog-highlight-navy">12 PM</span> 均停止调度，因为必须尽量保证系统任务能抢占到资源。若当前处于该时间段，则说明任务中午过后才会开始执行；若不是，继续阅读。</div>
+    <div class="blog-text-normal">3️⃣ 若由于服务器或任务数量过多等原因导致部分任务排队时间超过两天，则任务不会再执行。可利用 #3.2 中的 SQL 语句查询任务创建时间，若未执行的任务均至少创建于两天前，则说明任务被自动抛弃，用于重新创建任务即可；若不是，继续阅读。</div>
+    <div class="blog-text-normal">4️⃣ 线上任务始终定时执行，除非有特殊情况会临时关闭任务调度，可先前往 🐬 Dolphin Scheduler 查看所有 <span class="blog-highlight-navy">H-</span> 开头的任务是否已标记 <span class="blog-highlight-navy">ONLINE</span>。若标记 <span class="blog-highlight-navy">OFFLINE</span> 或无任何标记，第一时间向产研询问具体情况。若调度正常，继续阅读。</div>
+    <div class="blog-text-normal">5️⃣ 让研发根据代码打印日志的位置检查是否有报错信息，并确认接口是否由于官方升级、包替换、代码逻辑或其他偶发问题导致签名不匹配；若应用正常，但 Flink 或 Doris 出现异常，可联系基建处理，研发无需重置任务状态。</div>
+    <div class="blog-question-title">🤨 任务调度时用户是如何排上队的？</div>
+    <div class="alert alert-success blog-question-body">🙋‍♂️ 每种类型的任务都是独立执行的，有多少种拉取类型就会有多少个定时执行的任务。每个任务流中，单次执行仅根据子表 <span class="blog-highlight-navy">id</span> 字段升序排序后，按照租户分组，反复轮询所有租户，对于每个租户尝试分配 5 个任务，直到任务总数达到或超过 30 个（若待执行任务总数本就不足 30 则直接全部分配），保证公平性。（注：最初版调度逻辑中，仅通过 <span class="blog-highlight-navy">ORDER BY id LIMIT 30</span> 分配任务，会出现部分租户饿死的现象。现有逻辑解决了这个问题，但可能会使得总拉取时间翻倍。Well, you can't have both, bro.）</div>
+    <div class="blog-header-3">3.3.2 任务迟迟无法结束</div>
+    <div class="blog-text-normal">1️⃣ 若任务状态始终为 <span class="blog-highlight-navy">执行中</span>，先利用 #3.2 中的 SQL 语句查询相同 <span class="blog-highlight-navy">main_id</span>（即隶属于同一主任务的子任务集合）下是否仍然存在状态为 <span class="blog-highlight-navy">21</span> 的任务。若是，则说明任务正在逐个执行，需要耐心等待；若不是，继续阅读。</div>
+    <div class="blog-text-normal">2️⃣ 可参见 #3.3.1 提及的原因2️⃣。若任务创建数量过多，则必须等待可调度时间段执行；若不是，继续阅读。</div>
+    <div class="blog-text-normal">3️⃣ 可参见 #3.3.1 提及的原因3️⃣。若部分任务被抛弃，则需要联系产研直接归档所有子任务，然后让用户重新创建必要的任务；若不是，继续阅读。</div>
+    <div class="blog-text-normal">4️⃣ 可参见 #3.3.1 提及的原因4️⃣。若调度正常，但扫描不到待执行任务，可联系产研确认 ETL 的最新逻辑；若逻辑无变化，继续阅读。</div>
+    <div class="blog-text-normal">5️⃣ 可参见 #3.3.1 提及的原因5️⃣。</div>
+    <div class="blog-question-title">🤨 正常流程下，哪个阶段意味着任务完成？</div>
+    <div class="alert alert-success blog-question-body">🙋‍♂️ 在初版产品方案中，原始单拉取、转标准单（if necessary）、分类、分摊、日月汇总及明细（if necessary）均完成，才算做手动拉取任务完成。我不认为这是个好主意，因为这会使得“系统拉取”和“手动拉取”中“拉取”的意义不同，给用户造成更多歧义，但产品经理坚持他的方案，而且已经把初步想法同步给了一两个实施。Not cool, dude. 因此，这套方案延续到了现在，但很多客户也提出了当初已经预想到的问题，即为何已经在页面看到了原始单和分类、分摊结果，但任务永远无法完成。根据将近半年的观察结果（Apr. 01, 2024 through Nov. 01, 2024），大概率是因为日月汇总任务繁重、无法及时完成，只能让研发手动归档（即将状态为 25 的任务更改为 30）任务。后来，我在 <span class="blog-highlight-navy">Share Supervisor</span> 中加入了一个 Fallback Plan，即自动归档那些状态处于“分摊中”且已保持了至少 35 个小时的任务，从用户层面解决了任务无法完成的问题。事实证明，这并不影响用户的其他操作，更重要的是那些着急的用户不会那么困惑了。</div>
+    <div class="blog-header-3">3.3.3 没有补拉到任何数据</div>
+    <div class="blog-text-normal">1️⃣ 首先确认任务状态至少为 25，而且不能是 80，然后利用 #3.2 中的 SQL 语句查询 <span class="blog-highlight-navy">increment</span> 字段是否有值（本质上就是 <span class="blog-highlight-navy">new_count</span> 和 <span class="blog-highlight-navy">org_count</span> 的差值。若某些原因导致该值为负数，则处理成零）。若该值大于零，则需要用于二次确认是否真的没有数据，必要时可让研发利用创建时间查询原始单表是否有记录；若没有新增账单数，继续阅读。</div>
+    <div class="blog-text-normal">2️⃣ 可让研发或测试直接调用接口，确认是否接口无数据。若无数据，则可能需要产品提工单询问；若有数据，继续阅读。</div>
+    <div class="blog-text-normal">3️⃣ 可让研发查看有无限流相关日志。对于京准通任务，由于其限流比较严重，可查询 <span class="blog-highlight-navy">reserved_field5</span> 字段是否为 <span class="blog-highlight-navy">AtCapacity</span>，若是，则表示限流过于严重，诸如此类的平台问题，研发无法解决。若没有限流或程序报错等日志，继续阅读。</div>
+    <div class="blog-text-normal">4️⃣ 可让研发确认该租户是否处于新集群（Doris2）。若是，则该租户有可能是落库延迟的受害者，需要与基建中心确认。若以上方案均未解决问题，尝试将任务状态重置，或让用户重新创建任务。</div>
   </div>
 </div>
+<div class="blog-end">(THE END)</div>
+<div class="blog-end-line"></div>

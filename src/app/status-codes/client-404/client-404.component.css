@@ -1,0 +1,30 @@
+.sc-404-container {
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+.sc-404-img {
+  border-radius: 12px;
+  display: block;
+  margin: 10px auto 30px auto;
+  width: 65%;
+}
+
+.sc-404-title {
+  color: #00299c;
+  font-size: 40px;
+  font-weight: bolder;
+  text-align: center;
+}
+
+.sc-404-text {
+  line-height: 30px;
+}
+
+.sc-404-home {
+  background: #d6f3d8;
+  border: 2px solid #79b67f;
+  border-radius: 8px;
+  padding: 5px;
+  cursor: pointer;
+}

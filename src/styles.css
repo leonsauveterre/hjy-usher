@@ -26,5 +26,215 @@ html, body {
   margin: 0; /* Remove default margin */
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+/****************** For blogs ******************/
+
+.blog-container {
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+.blog-title {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  color: #00299c;
+  font-size: 2.5em; /* Make font-size relative so it scales with screen */
+  font-weight: bolder;
+  letter-spacing: 5px;
+  text-align: center !important;
+}
+
+.blog-sub-title {
+  margin-top: 10px;
+  margin-bottom: 35px;
+  color: #838383;
+  font-size: 15px;
+  text-align: center !important;
+}
+
+.blog-paragraph-break {
+  margin-top: 45px;
+}
+
+.blog-paragraph {
+  border-top: 1px solid #e6e6e6;
+  padding: 10px 25px 10px 45px;
+}
+
+.blog-header-1 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: -15px;
+  color: #000000;
+  font-size: 22px;
+  font-weight: bolder;
+  text-align: left !important;
+}
+
+.blog-header-2 {
+  margin-top: 25px;
+  margin-bottom: 10px;
+  margin-left: -15px;
+  color: #000000;
+  font-size: 20px;
+  text-align: left !important;
+}
+
+.blog-header-3 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: -15px;
+  color: #000000;
+  font-size: 18px;
+  text-align: left !important;
+}
+
+.blog-text-normal {
+  margin-bottom: 15px;
+  line-height: 28px;
+  word-break: break-word;
+  word-wrap: break-word;
+  color: #1b1b1b;
+  font-size: 16px;
+}
+
+.blog-highlight-navy {
+  margin-left: 2px;
+  margin-right: 2px;
+  background: navy;
+  border-radius: 8px;
+  color: white;
+  padding: 3px 6px 3px 6px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.blog-highlight-canary {
+  margin-left: 2px;
+  margin-right: 2px;
+  background: #f8faa9;
+  border-radius: 8px;
+  padding: 3px 6px 3px 6px;
+  font-weight: bold;
+}
+
+.blog-highlight-compact {
+  background: #00299c;
+  color: azure;
+  border: 2px solid #001757;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.blog-question-title {
+  border-radius: 6px;
+  background: linear-gradient(to right, #508068, #b9ddca);
+  color: white;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  margin-top: 20px;
+}
+
+.blog-question-body {
+  line-height: 2.0;
+  color: #043a25;
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.blog-warning-small {
+  border-radius: 6px;
+  border: 1px solid #ffbee5;
+  background: #ffecf2;
+  color: #6c0031;
+  padding: 6px;
+  margin-top: -15px;
+}
+
+.blog-deprecation {
+  text-decoration: line-through;
+  text-decoration-style: dashed;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.blog-cond-container {
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Optional: Centers the table horizontally in the container */
+  padding: 10px 10px 10px 20px;
+  margin-bottom: 15px;
+}
+
+.blog-cond-border {
+  border-collapse: separate;
+  width: 100%;
+}
+
+.blog-right-align {
+  vertical-align: middle;
+  line-height: 100%;
+  text-align: right;
+}
+
+table.blog-cond-border tbody tr {
+  vertical-align: middle;
+  padding: 10px;
+  line-height: 30px;
+}
+
+input.form-check-input {
+  vertical-align: middle; /* Ensures checkbox aligns with label text */
+  margin-right: 5px;
+}
+
+.form-check-label {
+  vertical-align: middle;
+}
+
+.input-group-text {
+  border: 2px solid #8f8f8f;
+  margin-right: 1px;
+  font-weight: bolder;
+}
+
+.ground-control {
+  background-image: repeating-linear-gradient(
+    45deg, /* Angle of the gradient */
+    #b3b3b3, /* Color 1 (gray) */
+    #b3b3b3 30px, /* Set the width of the gray stripe */
+    white 30px, /* Start the white stripe after the gray one */
+    white 60px /* Set the width of the white stripe */
+  );
+  background-size: 200% 200%;
+  width: 100%;
+  text-align: center;
+  align-content: center;
+}
+
+.blog-end {
+  height: 30px;
+  text-align: right;
+  padding: 30px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.blog-end-line {
+  background: linear-gradient(to right, white, #474747, white);
+  column-fill: balance;
+  width: 100%;
+  height: 2px;
+}

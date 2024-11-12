@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Event, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { NgClass, NgForOf, NgIf, NgOptimizedImage } from '@angular/common';
 import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
 import Darkmode from 'darkmode-js';
@@ -44,6 +44,15 @@ export class AppComponent implements OnInit {
       mixColor: '#f8f8f8'
     });
     this.darkModeActive = this.darkmode.isActivated();
+
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        try {
+          window.scrollTo(0, 0);
+        } catch (ignored) {
+        }
+      }
+    });
   }
 
   toggleDarkMode() {

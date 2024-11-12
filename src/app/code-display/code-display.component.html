@@ -2,5 +2,5 @@
   <button (click)="copyToClipboard()" class="copy-btn">
     {{ copied ? '🫡 Copied!' : 'Copy' }}
   </button>
-  <pre class="line-numbers rounded-3" style="white-space: pre-wrap"><code [class]="'language-' + language">{{ code }}</code></pre>
+  <pre class="line-numbers rounded-3" style="white-space: pre-wrap"><code #codeElement [class]="'language-' + language">{{ code }}</code></pre>
 </div>
