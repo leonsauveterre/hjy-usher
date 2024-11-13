@@ -2,11 +2,11 @@
   <div style="background-image: url('/img/merry-christmas-horizontal-upper.jpg'); height: 60px; width: 100%; background-position-y: 1625px"></div>
   <div class="blog-title">账单删除任务</div>
   <div style="background-image: url('/img/merry-christmas-horizontal-lower.jpg'); height: 60px; width: 100%"></div>
-  <div class="blog-sub-title">Leon Zhao | zhaoliang03&#64;huice.com, Nov 12, 2024<br>Last updated at: 18:33:52 (UTC+8), Nov 12, 2024</div>
+  <div class="blog-sub-title">Leon Zhao | zhaoliang03&#64;huice.com, Nov 12, 2024<br>Last updated at: 18:38:25 (UTC+8), Nov 13, 2024</div>
   <div class="blog-paragraph">
     <div class="blog-header-1">1 概述</div>
     <div class="blog-text-normal">账单删除任务是为了应对用户错误导入数据而产生的，它可以删除用户导入的原始单及所有相关数据表（如标准单、分摊结果、日月汇总等）。和手动拉取任务一样，所有需要删除的条目都需要记录、排队，等待调度器逐个执行。</div>
-    <div class="blog-text-normal">为了尽量减少数据删除过程中可能产生的干扰，当有导入记录处于删除中状态时，禁止用户导入新文件；反之亦成立。</div>
+    <div class="blog-text-normal">为了尽量减少数据删除过程中可能产生的干扰，当有导入记录处于删除中状态时，禁止用户导入新文件；反之亦成立。该限制由前端控制。</div>
   </div>
   <div class="blog-paragraph">
     <div class="blog-header-1">2 任务结构</div>
@@ -14,6 +14,342 @@
     <div class="blog-text-normal">
       <span class="blog-highlight-compact">MySQL</span>
       <span class="blog-highlight-canary">bill_import_delayed_deletion</span>
+    </div>
+    <table class="table table-striped table-bordered">
+      <thead>
+      <tr>
+        <th>字段</th>
+        <th>类型</th>
+        <th>含义</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>bibi_id</td>
+        <td>BIGINT</td>
+        <td>即 <span class="blog-highlight-navy">bill_import_basic_info</span> 表的主键</td>
+      </tr>
+      <tr>
+        <td>custom_bill_id</td>
+        <td>VARCHAR(50)</td>
+        <td>自定义账单 ID。非自定义账单无需此字段</td>
+      </tr>
+      <tr>
+        <td>batch_number</td>
+        <td>VARCHAR(100)</td>
+        <td>批次号</td>
+      </tr>
+      <tr>
+        <td>bill_name</td>
+        <td>VARCHAR(255)</td>
+        <td>账单名称，由慧经营为每条原始单生成</td>
+      </tr>
+      <tr>
+        <td>bill_type</td>
+        <td>VARCHAR(20)</td>
+        <td>账单类型，详见下方枚举</td>
+      </tr>
+      <tr>
+        <td>import_channel_platform</td>
+        <td>VARCHAR(30)</td>
+        <td>导入渠道，详见下方枚举</td>
+      </tr>
+      <tr>
+        <td>custom_platform_id</td>
+        <td>VARCHAR(128)</td>
+        <td>自定义账单平台 ID。非自定义账单无需此字段</td>
+      </tr>
+      <tr>
+        <td>sub_bill_platform</td>
+        <td>VARCHAR(100)</td>
+        <td>子平台，详见下方枚举</td>
+      </tr>
+      <tr>
+        <td>date_list</td>
+        <td>VARCHAR(2048)</td>
+        <td>导入的文件中实际账单的无序日期集合，用逗号拼接</td>
+      </tr>
+      <tr>
+        <td>created_at</td>
+        <td>DATETIME</td>
+        <td>任务创建时间</td>
+      </tr>
+      <tr>
+        <td>started_at</td>
+        <td>DATETIME</td>
+        <td>任务开始时间</td>
+      </tr>
+      <tr>
+        <td>completed_at</td>
+        <td>DATETIME</td>
+        <td>数据删除完成时间</td>
+      </tr>
+      <tr>
+        <td>archived_at</td>
+        <td>DATETIME</td>
+        <td>归档时间（回调经分时间）</td>
+      </tr>
+      <tr>
+        <td>verified_at</td>
+        <td>DATETIME</td>
+        <td>验证时间</td>
+      </tr>
+      <tr>
+        <td>proof</td>
+        <td>VARCHAR(1024)</td>
+        <td>验证结果</td>
+      </tr>
+      <tr>
+        <td>task_status</td>
+        <td>TINYINT</td>
+        <td>任务执行状态，详见下方枚举</td>
+      </tr>
+      <tr>
+        <td>其他字段</td>
+        <td>--</td>
+        <td>其他字段为通用或 ERP 约定字段，意义与其他表一致</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="blog-header-2">2.2 字段枚举</div>
+    <div class="blog-text-normal"><span class="blog-highlight-canary">bill_type</span></div>
+    <table class="table table-striped table-bordered">
+      <thead>
+      <tr>
+        <th>枚举</th>
+        <th>说明</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>money_bill</td>
+        <td>资金账单</td>
+      </tr>
+      <tr>
+        <td>marketing_bill</td>
+        <td>营销账单</td>
+      </tr>
+      <tr>
+        <td>custom_bill</td>
+        <td>自定义账单</td>
+      </tr>
+      <tr>
+        <td>live_broadcast_bill</td>
+        <td>直播账单</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="blog-paragraph-break"></div>
+    <div class="blog-text-normal"><span class="blog-highlight-canary">import_channel_platform</span></div>
+    <table class="table table-striped table-bordered">
+      <thead>
+      <tr>
+        <th>枚举</th>
+        <th>说明</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>alipay_money</td>
+        <td>资金账单 - 支付宝账单</td>
+      </tr>
+      <tr>
+        <td>jd_money</td>
+        <td>资金账单 - 京东货款账单</td>
+      </tr>
+      <tr>
+        <td>pdd_money</td>
+        <td>资金账单 - 拼多多货款流水账单</td>
+      </tr>
+      <tr>
+        <td>xmyp_money</td>
+        <td>资金账单 - 小米有品账单</td>
+      </tr>
+      <tr>
+        <td>almm</td>
+        <td>营销账单 - 阿里妈妈账单</td>
+      </tr>
+      <tr>
+        <td>pdd</td>
+        <td>营销账单 - 拼多多账单</td>
+      </tr>
+      <tr>
+        <td>doudian</td>
+        <td>直播账单 - 抖音千川账单</td>
+      </tr>
+      <tr>
+        <td>custom_money_bill</td>
+        <td>自定义资金账单</td>
+      </tr>
+      <tr>
+        <td>custom_marketing_bill</td>
+        <td>自定义营销账单</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="blog-paragraph-break"></div>
+    <div class="blog-text-normal"><span class="blog-highlight-canary">sub_bill_platform</span></div>
+    <table class="table table-striped table-bordered">
+      <thead>
+      <tr>
+        <th>枚举</th>
+        <th>说明</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>pdd_money</td>
+          <td>资金账单 - 拼多多货款账单</td>
+        </tr>
+        <tr>
+          <td>pdd_billions_money</td>
+          <td>资金账单 - 拼多多百亿补贴</td>
+        </tr>
+        <tr>
+          <td>carriage_bill</td>
+          <td>资金账单 - 小米有品运费免邮表</td>
+        </tr>
+        <tr>
+          <td>changeing_fee_bill (sic)</td>
+          <td>资金账单 - 小米有品奖惩罚金</td>
+        </tr>
+        <tr>
+          <td>installment_bill</td>
+          <td>资金账单 - 小米有品手续费明细</td>
+        </tr>
+        <tr>
+          <td>pay_settlement_bill</td>
+          <td>资金账单 - 小米有品贷款结算单</td>
+        </tr>
+        <tr>
+          <td>almm_ztc_bill</td>
+          <td>营销账单 - 阿里妈妈直通车</td>
+        </tr>
+        <tr>
+          <td>almm_cube_bill</td>
+          <td>营销账单 - 阿里妈妈引力魔方</td>
+        </tr>
+        <tr>
+          <td>almm_pxb_bill</td>
+          <td>营销账单 - 阿里妈妈明星店铺</td>
+        </tr>
+        <tr>
+          <td>almm_wxt_bill</td>
+          <td>营销账单 - 阿里妈妈万相台</td>
+        </tr>
+        <tr>
+          <td>almm_wj_qztg_bill</td>
+          <td>营销账单 - 阿里妈妈无界全站推广</td>
+        </tr>
+        <tr>
+          <td>almm_wxtwj_bill</td>
+          <td>营销账单 - 阿里妈妈万相台无界</td>
+        </tr>
+        <tr>
+          <td>pdd_search_bill</td>
+          <td>营销账单 - 拼多多多多搜索</td>
+        </tr>
+        <tr>
+          <td>pdd_shop_bill</td>
+          <td>营销账单 - 拼多多明星店铺</td>
+        </tr>
+        <tr>
+          <td>pdd_scenes_bill</td>
+          <td>营销账单 - 拼多多多多场景</td>
+        </tr>
+        <tr>
+          <td>pdd_promote_bill</td>
+          <td>营销账单 - 拼多多全站推广</td>
+        </tr>
+        <tr>
+          <td>pdd_standard_bill</td>
+          <td>营销账单 - 拼多多标准推广</td>
+        </tr>
+        <tr>
+          <td>pdd_live_bill</td>
+          <td>营销账单 - 拼多多直播推广</td>
+        </tr>
+        <tr>
+          <td>pdd_goods_bill</td>
+          <td>营销账单 - 拼多多商品推广</td>
+        </tr>
+        <tr>
+          <td>qianchuan_std_promo_bill</td>
+          <td>直播账单 - 抖店千川标准推广</td>
+        </tr>
+        <tr>
+          <td>qianchuan_glo_promo_bill</td>
+          <td>直播账单 - 抖店千川全域推广</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="blog-paragraph-break"></div>
+    <div class="blog-text-normal"><span class="blog-highlight-canary">task_status</span></div>
+    <table class="table table-striped table-bordered">
+      <thead>
+      <tr>
+        <th>枚举</th>
+        <th>说明</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>0</td>
+        <td>等待调度</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>正在执行</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>删除任务完成</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>任务异常</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>任务正常结束（已回调经分）</td>
+      </tr>
+      <tr>
+        <td>92</td>
+        <td>等待调度，但不进行删除前的数据校验（强制删除）</td>
+      </tr>
+      <tr>
+        <td>93</td>
+        <td>等待调度，但删除前状态为导入失败（仅针对四个预置自定义账单：千川推直播间、千川推商品（新）、全域千川推商品、全域千川推直播间，状态 94 同理）</td>
+      </tr>
+      <tr>
+        <td>94</td>
+        <td>等待调度，但删除前状态为待审核或已完成</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="blog-paragraph">
+    <div class="blog-header-1">3 相关数据交互及问题排查</div>
+    <div class="blog-header-2">3.1 特定任务信息查询</div>
+    <div class="blog-text-normal"><span class="blog-highlight-canary">按条件查询任务</span></div>
+    <div class="mt-3" id="bills-manual-input-3-1-select-1">
+      <div class="d-flex align-items-center input-group-prepend">
+        <span class="input-group-text" id="bills-manual-input-3-1-select-label1">SELECT</span>
+        <button type="button" class="btn btn-outline-primary btn-sm ms-1" (click)="selectAllCheckboxesForSelect1()">Select All</button>
+        <button type="button" class="btn btn-outline-secondary btn-sm ms-1" (click)="invertCheckboxSelectionForSelect1()">Invert Selection</button>
+      </div>
+      <div class="blog-cond-container">
+        <table class="blog-cond-border">
+          <tbody>
+          <tr *ngFor="let cond of manual0301Select01">
+            <td *ngFor="let f of cond">
+              <input class="form-check-input" type="checkbox" [id]="f.id" [attr._fieldName]="f.fieldName" [checked]="f.checked" />
+              <label class="form-check-label ms-1" [for]="f.id">{{ f.label }}</label>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

@@ -2,7 +2,7 @@
   <div style="background-image: url('/img/merry-christmas-horizontal-upper.jpg'); height: 60px; width: 100%; background-position-y: 1625px"></div>
   <div class="blog-title">手动拉取任务</div>
   <div style="background-image: url('/img/merry-christmas-horizontal-lower.jpg'); height: 60px; width: 100%"></div>
-  <div class="blog-sub-title">Leon Zhao | zhaoliang03&#64;huice.com, Nov 06, 2024<br>Last updated at: 16:26:22 (UTC+8), Nov 12, 2024</div>
+  <div class="blog-sub-title">Leon Zhao | zhaoliang03&#64;huice.com, Nov 06, 2024<br>Last updated at: 18:35:39 (UTC+8), Nov 13, 2024</div>
   <div class="blog-paragraph">
     <div class="blog-header-1">1 概述</div>
     <div class="blog-text-normal">手动拉取任务是为了弥补系统拉取任务没有拉取到的数据而诞生的，不适用于大量任务创建，也不能保证数据一定会补拉到，只是给用户提供手动拉取账单的入口，需要用户自行保证数据完整。</div>
@@ -443,6 +443,9 @@
     <div class="blog-text-normal">2️⃣ 可让研发或测试直接调用接口，确认是否接口无数据。若无数据，则可能需要产品提工单询问；若有数据，继续阅读。</div>
     <div class="blog-text-normal">3️⃣ 可让研发查看有无限流相关日志。对于京准通任务，由于其限流比较严重，可查询 <span class="blog-highlight-navy">reserved_field5</span> 字段是否为 <span class="blog-highlight-navy">AtCapacity</span>，若是，则表示限流过于严重，诸如此类的平台问题，研发无法解决。若没有限流或程序报错等日志，继续阅读。</div>
     <div class="blog-text-normal">4️⃣ 可让研发确认该租户是否处于新集群（Doris2）。若是，则该租户有可能是落库延迟的受害者，需要与基建中心确认。若以上方案均未解决问题，尝试将任务状态重置，或让用户重新创建任务。</div>
+    <div class="blog-header-3">3.3.4 没有手动任务日志</div>
+    <div class="blog-text-normal">1️⃣ 首先参考 #3.3.1 和 #3.3.2 确认任务是否正常开始或结束。若任务已开始但没有开始日志，可联系研发，但一般处理方法只是根据开始时间补上一条日志，意义不大。若系统记录了开始日志但没有结束日志，继续阅读。</div>
+    <div class="blog-text-normal">2️⃣ 若任务状态为拉取完成但没有结束日志，大概率任务被 Share Supervisor 强制归档，属于正常情况，后续考虑优化。</div>
   </div>
 </div>
 <div class="blog-end">(THE END)</div>
