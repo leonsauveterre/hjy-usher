@@ -9,15 +9,15 @@
 
 h1 {
   font-size: 2.5em;
-  color: #2b2bff;
+  color: #0606d6;
   margin-bottom: 10px;
-  animation: textGlow 1.5s ease infinite;
+  animation: textGlow 1.5s ease-in-out infinite;
 }
 
 p {
   font-size: 1.2em;
-  color: #555;
-  margin: 10px 0;
+  color: black;
+  margin: 20px 0;
 }
 
 .declaration-list {
@@ -30,8 +30,8 @@ p {
   margin: 15px 0;
   color: #333;
   text-align: left;
-  line-height: 1.5;
-  animation: fadeIn 1s ease;
+  line-height: 1.8;
+  animation: fadeIn 0.5s ease;
 }
 
 strong {
@@ -60,6 +60,6 @@ strong {
 }
 
 @keyframes textGlow {
-  0%, 100% { text-shadow: 0 0 5px #0033cc, 0 0 10px #0033cc, 0 0 15px #0066ff, 0 0 20px #3399ff; }
-  50% { text-shadow: 0 0 10px #0033cc, 0 0 15px #0066ff, 0 0 20px #3399ff, 0 0 25px #66ccff; }
+  0%, 100% { text-shadow: 0 0 5px #1549ec, 0 0 10px #3a65f1, 0 0 15px #4991f8, 0 0 20px #b4dafb; }
+  50% { text-shadow: 0 0 10px #2e5ff3, 0 0 15px #4791f4, 0 0 20px #8dc1fa, 0 0 25px #d4e5ed; }
 }
