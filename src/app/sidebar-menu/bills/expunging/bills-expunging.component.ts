@@ -27,7 +27,7 @@ export class BillsExpungingComponent {
   private presetStatements: readonly string[] = [
     `SELECT *
 FROM bill_import_delayed_deletion`,
-  ]
+  ];
 
   constructor(private cdr: ChangeDetectorRef, @Inject(PLATFORM_ID) private platformId: Object) {
   }
@@ -159,7 +159,8 @@ FROM bill_import_delayed_deletion`,
             { id: 'manual-expunging-cond-2-cb18', label:'全站推广', expanded: false, importChannelPlatform: 'pdd', subBillPlatform: 'pdd_promote_bill' },
             { id: 'manual-expunging-cond-2-cb19', label:'标准推广', expanded: false, importChannelPlatform: 'pdd', subBillPlatform: 'pdd_standard_bill' },
             { id: 'manual-expunging-cond-2-cb20', label:'直播推广', expanded: false, importChannelPlatform: 'pdd', subBillPlatform: 'pdd_live_bill' },
-            { id: 'manual-expunging-cond-2-cb21', label:'商品推广', expanded: false, importChannelPlatform: 'pdd', subBillPlatform: 'pdd_goods_bill' }
+            { id: 'manual-expunging-cond-2-cb21', label:'商品推广', expanded: false, importChannelPlatform: 'pdd', subBillPlatform: 'pdd_goods_bill' },
+            { id: 'manual-expunging-cond-2-cb22', label:'红包发放', expanded: false, importChannelPlatform: 'pdd', subBillPlatform: 'pdd_envelope_bill' }
           ]
         }
       ]
@@ -172,8 +173,8 @@ FROM bill_import_delayed_deletion`,
           label: '抖店千川',
           expanded: false,
           subOptions: [
-            { id: 'manual-expunging-cond-2-cb22', label:'标准推广', expanded: false, importChannelPlatform: 'doudian', subBillPlatform: 'qianchuan_std_promo_bill' },
-            { id: 'manual-expunging-cond-2-cb23', label:'全域推广', expanded: false, importChannelPlatform: 'doudian', subBillPlatform: 'qianchuan_glo_promo_bill' }
+            { id: 'manual-expunging-cond-2-cb23', label:'标准推广', expanded: false, importChannelPlatform: 'doudian', subBillPlatform: 'qianchuan_std_promo_bill' },
+            { id: 'manual-expunging-cond-2-cb24', label:'全域推广', expanded: false, importChannelPlatform: 'doudian', subBillPlatform: 'qianchuan_glo_promo_bill' }
           ]
         }
       ]
@@ -186,14 +187,14 @@ FROM bill_import_delayed_deletion`,
           label: '资金账单',
           expanded: false,
           subOptions: [
-            { id: 'manual-expunging-cond-2-cb24', label:'自定义资金账单', expanded: false, importChannelPlatform: 'custom_money_bill', subBillPlatform: '' },
+            { id: 'manual-expunging-cond-2-cb25', label:'自定义资金账单', expanded: false, importChannelPlatform: 'custom_money_bill', subBillPlatform: '' },
           ]
         },
         {
           label: '营销账单',
           expanded: false,
           subOptions: [
-            { id: 'manual-expunging-cond-2-cb25', label:'自定义营销账单', expanded: false, importChannelPlatform: 'custom_marketing_bill', subBillPlatform: '' },
+            { id: 'manual-expunging-cond-2-cb26', label:'自定义营销账单', expanded: false, importChannelPlatform: 'custom_marketing_bill', subBillPlatform: '' },
           ]
         }
       ]
@@ -204,7 +205,7 @@ FROM bill_import_delayed_deletion`,
     option.expanded = !option.expanded;
   }
 
-  checkboxIdsForCond2: string[] = Array.from({ length: 25 }, (_, i) => `manual-expunging-cond-2-cb${i + 1}`);
+  checkboxIdsForCond2: string[] = Array.from({ length: 26 }, (_, i) => `manual-expunging-cond-2-cb${i + 1}`);
 
   selectAllCheckboxesForCond2(): void {
     if (isPlatformBrowser(this.platformId)) {

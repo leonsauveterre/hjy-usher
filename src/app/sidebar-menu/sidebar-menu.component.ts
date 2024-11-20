@@ -56,7 +56,7 @@ export class SidebarMenuComponent {
       subfuncs: [
         {
           id: 'menu-utilities-guidance',
-          name: '文章语法指导'
+          name: '博文撰写样式推荐'
         },
         {
           id: 'menu-utilities-gen-insert-into',

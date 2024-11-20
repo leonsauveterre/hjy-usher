@@ -1,1 +1,118 @@
-<p>guidance works!</p>
+<div id="blog-utilities-guidance-container">
+  <div class="blog-title" style="font-size: 34px">Blog Styling Recommendations</div>
+  <div class="blog-sub-title">Leon Zhao | zhaoliang03&#64;huice.com, Nov 19, 2024<br>Last updated at: 10:25:17 (UTC+8), Nov 20, 2024</div>
+
+  <div id="blog-utilities-guidance-point-1" class="blog-container mx-auto">
+    <div class="blog-title">1. The Outer Container</div>
+    <div class="blog-paragraph">
+      <div class="blog-text-normal">
+        Every blog must have a unique identity. Wrap it with an <span class="blog-highlight-breeze" breezeController>outer container</span> using a unique <span class="blog-highlight-breeze" breezeController>id</span> and class <span class="blog-highlight-breeze" breezeController>blog-container mx-auto</span>. This keeps the layout centered and consistent. Example:
+      </div>
+      <app-code-display id="blog-utilities-guidance-example-0" [code]="presetStatements[0]" language="html"></app-code-display>
+    </div>
+  </div>
+
+  <div id="blog-utilities-guidance-point-2" class="blog-container mx-auto">
+    <div class="blog-title">2. Titles and Headlines</div>
+    <div class="blog-paragraph">
+      <div class="blog-header-1">The Main Title</div>
+      <div class="blog-text-normal">
+        Use a <span class="blog-highlight-breeze" breezeController>div</span> with the class <span class="blog-highlight-breeze" breezeController>blog-title</span> for your blog title. Ensure it's captivating and reflects the content. Example:
+      </div>
+      <app-code-display id="blog-utilities-guidance-example-1" [code]="presetStatements[1]" language="html"></app-code-display>
+    </div>
+    <div class="blog-paragraph">
+      <div class="blog-header-1">Subtitles</div>
+      <div class="blog-text-normal">
+        Use <span class="blog-highlight-breeze" breezeController>blog-sub-title</span> for subtitles. While optional, adding the author's name and last updated time is highly recommended for personalization. Example:
+      </div>
+      <app-code-display id="blog-utilities-guidance-example-2" [code]="presetStatements[2]" language="html"></app-code-display>
+    </div>
+  </div>
+
+  <div id="blog-utilities-guidance-point-3" class="blog-container mx-auto">
+    <div class="blog-title">3. Paragraph Structuring</div>
+    <div class="blog-paragraph">
+      <div class="blog-header-1">Wrapper</div>
+      <div class="blog-text-normal">
+        Each paragraph is contained within a <span class="blog-highlight-breeze" breezeController>div</span> using the class <span class="blog-highlight-breeze" breezeController>blog-paragraph</span>. This ensures clear separation between ideas. Example:
+      </div>
+      <app-code-display id="blog-utilities-guidance-example-3" [code]="presetStatements[3]" language="html"></app-code-display>
+    </div>
+    <div class="blog-paragraph">
+      <div class="blog-header-1">Headers</div>
+      <div class="blog-text-normal">
+        Headers should be composed by <span class="blog-highlight-breeze" breezeController>blog-header-1</span>, <span class="blog-highlight-breeze" breezeController>blog-header-2</span>, or <span class="blog-highlight-breeze" breezeController>blog-header-3</span>. However, for better comprehensibility, I wouldn't use <span class="blog-highlight-breeze" breezeController>blog-header-3</span> personally because that would be too deep a level for a simple blog. That said, you can always use Delimiters & Tags (see below). Example:
+      </div>
+      <app-code-display id="blog-utilities-guidance-example-4" [code]="presetStatements[4]" language="html"></app-code-display>
+    </div>
+    <div class="blog-paragraph">
+      <div class="blog-header-1">Texts</div>
+      <div class="blog-text-normal">
+        Regular text should go in <span class="blog-highlight-breeze" breezeController>blog-text-normal</span>. Example:
+      </div>
+      <app-code-display id="blog-utilities-guidance-example-5" [code]="presetStatements[5]" language="html"></app-code-display>
+    </div>
+    <div class="blog-paragraph">
+      <div class="blog-header-1">Delimiters & Tags</div>
+      <div class="blog-text-normal">
+        Use <span class="blog-highlight-breeze" breezeController>blog-highlight-canary</span> for delimiters, often accompanied by <span class="blog-highlight-breeze" breezeController>blog-highlight-compact</span> tags for a quirky feel. Example:
+      </div>
+      <app-code-display id="blog-utilities-guidance-example-6" [code]="presetStatements[6]" language="html"></app-code-display>
+    </div>
+    <div class="blog-paragraph">
+      <div class="blog-header-1">Tables</div>
+      <div class="blog-text-normal">
+        Use Bootstrap's <span class="blog-highlight-breeze" breezeController>table-striped</span> and <span class="blog-highlight-breeze" breezeController>table-bordered</span> classes for tables. Headers, rows, and cells don't require custom styles. Example:
+      </div>
+      <app-code-display id="blog-utilities-guidance-example-7" [code]="presetStatements[7]" language="html"></app-code-display>
+    </div>
+    <div class="blog-paragraph">
+      <div class="blog-header-1">Highlighter</div>
+      <div class="blog-text-normal">
+        For highlights, use <span class="blog-highlight-breeze" breezeController>blog-highlight-canary</span> or <span class="blog-highlight-breeze" breezeController>blog-highlight-navy</span>. Preferably, I would use <span class="blog-highlight-breeze" breezeController>blog-highlight-navy</span> more because the former one is initially designed for Delimiters & Tags, but it's up to you anyway. Example:
+      </div>
+      <app-code-display id="blog-utilities-guidance-example-8" [code]="presetStatements[8]" language="html"></app-code-display>
+    </div>
+    <div class="blog-paragraph">
+      <div class="blog-header-1">Q & A Boxes</div>
+      <div class="blog-text-normal">
+        Use <span class="blog-highlight-breeze" breezeController>blog-question-title</span> for the question and <span class="blog-highlight-breeze" breezeController>alert alert-success blog-question-body</span> for the answer. Example:
+      </div>
+      <app-code-display id="blog-utilities-guidance-example-9" [code]="presetStatements[9]" language="html"></app-code-display>
+    </div>
+    <div class="blog-paragraph">
+      <div class="blog-header-1">Numbering</div>
+      <div class="blog-text-normal">
+        For numbering, I adopted a more intriguing and fun way: keycap emojis. Directly use these to emphasize while keeping things simple: 0️⃣1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣🔟*️⃣#️⃣⌨️☎️🏆, followed by a space. They are compatible with iOS 2.2+, Android 5.0+, and Windows 8.1+. Example:
+      </div>
+      <app-code-display id="blog-utilities-guidance-example-10" [code]="presetStatements[10]" language="html"></app-code-display>
+    </div>
+    <div class="blog-paragraph">
+      <div class="blog-header-1">Code Snippets</div>
+      <div class="blog-text-normal">
+        For code snippets, you must use the out-of-the-box <span class="blog-highlight-breeze" breezeController>app-code-display</span> label with a specific id, a code snippet itself, and declare its language. Example:
+      </div>
+      <app-code-display id="blog-utilities-guidance-example-11" [code]="presetStatements[11]" language="html"></app-code-display>
+    </div>
+    <div class="blog-paragraph">
+      <div class="blog-header-1">Other Components</div>
+      <div class="blog-text-normal">
+        There are many other components that haven't been included in my customized model collection. In that case, you may use whatever Bootstrap recommends, refer to current blogs, or just do your own style. Example:
+      </div>
+      <app-code-display id="blog-utilities-guidance-example-12" [code]="presetStatements[12]" language="html"></app-code-display>
+    </div>
+  </div>
+
+  <div id="blog-utilities-guidance-point-4" class="blog-container mx-auto">
+    <div class="blog-title">4. The Grand Finale</div>
+    <div class="blog-paragraph">
+      <div class="blog-text-normal">
+        End your blog with a flourish. Add a final <span class="blog-highlight-breeze" breezeController>blog-end</span> div and an empty <span class="blog-highlight-breeze" breezeController>blog-end-line</span> div to signify the end. Example:
+      </div>
+      <app-code-display id="blog-utilities-guidance-example-13" [code]="presetStatements[13]" language="html"></app-code-display>
+    </div>
+  </div>
+</div>
+<div class="blog-end">(THE END)</div>
+<div class="blog-end-line"></div>
