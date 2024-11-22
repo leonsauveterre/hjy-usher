@@ -18,7 +18,8 @@
 }
 
 .sc-404-text {
-  line-height: 30px;
+  font-size: large;
+  line-height: 35px;
 }
 
 .sc-404-home {
@@ -27,4 +28,13 @@
   border-radius: 8px;
   padding: 5px;
   cursor: pointer;
+}
+
+.sc-404-home:hover {
+  background: #b9e4bc;
+}
+
+
+.sc-404-home:active {
+  background: #abd5ad;
 }

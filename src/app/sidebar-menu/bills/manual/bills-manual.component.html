@@ -330,12 +330,12 @@
       <div class="blog-cond-container">
         <table class="blog-cond-border">
           <tbody>
-          <tr *ngFor="let cond of manual0301Select01">
-            <td *ngFor="let f of cond">
-              <input class="form-check-input" type="checkbox" [id]="f.id" [attr._fieldName]="f.fieldName" [checked]="f.checked" />
-              <label class="form-check-label ms-1" [for]="f.id">{{ f.label }}</label>
-            </td>
-          </tr>
+            <tr *ngFor="let cond of manual0301Select01">
+              <td *ngFor="let f of cond">
+                <input class="form-check-input" type="checkbox" [id]="f.id" [attr._fieldName]="f.fieldName" [checked]="f.checked" />
+                <label class="form-check-label ms-1" [for]="f.id">{{ f.label }}</label>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>

@@ -1,1 +1,117 @@
-<p>gen-insert-into works!</p>
+<div id="blog-gen-insert-into-container" class="blog-container mx-auto">
+  <div class="blog-title">INSERT-INTO 生成器</div>
+  <div class="blog-sub-title">Leon Zhao | zhaoliang03&#64;huice.com, Nov 22, 2024<br>Last updated at: 14:59:36 (UTC+8), Nov 22, 2024</div>
+  <div class="blog-paragraph">
+    <div class="blog-header-1">功能描述 & 使用方法</div>
+    <div class="blog-text-normal">此功能旨在简化从原始数据库查询输出生成 SQL <span class="blog-highlight-navy">INSERT INTO</span> 语句的过程。用户需要提供表名，并将原始查询结果（例如从 MySQL 导出的数据）粘贴至文本框中，并配置可选项。然后，该方法将自动处理原始数据，并将其格式化为语法正确的 <span class="blog-highlight-navy">INSERT INTO</span> 语句。这样，迁移或备份数据就会变得很容易，在确保了一致性的同时节省了大量手动格式化的时间。</div>
+  </div>
+  <div class="blog-paragraph">
+    <div class="blog-header-1">Getting Started</div>
+    <div class="mb-3 input-group" id="gen-insert-into-input-cond1">
+      <div class="input-group-prepend">
+        <span class="input-group-text">表名</span>
+      </div>
+      <input type="text" class="form-control" placeholder="可输入任意字符串，支持子数据库前缀" id="gen-insert-into-input-2-table-name">
+    </div>
+    <div class="mt-3" id="gen-insert-into-input-cond2">
+      <div class="d-flex align-items-center input-group-prepend">
+        <span class="input-group-text">高级选项</span>
+      </div>
+      <div class="blog-cond-container">
+        <table class="blog-cond-border">
+          <tbody>
+            <tr>
+              <td>
+                <input class="form-check-input" type="checkbox" id="gen-insert-into-input-cond2-opt1" />
+                <label class="form-check-label ms-1" for="gen-insert-into-input-cond2-opt1">关键词全小写（默认全大写）</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input class="form-check-input" type="checkbox" id="gen-insert-into-input-cond2-opt2" />
+                <label class="form-check-label ms-1" for="gen-insert-into-input-cond2-opt2">每条插入语句独立（默认 merge 所有插入语句）</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input class="form-check-input" type="checkbox" id="gen-insert-into-input-cond2-opt3" />
+                <label class="form-check-label ms-1" for="gen-insert-into-input-cond2-opt3">自动忽略无法解析的行（异常情况默认报错）</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input class="form-check-input" type="checkbox" id="gen-insert-into-input-cond2-opt4" />
+                <label class="form-check-label ms-1" for="gen-insert-into-input-cond2-opt4">将 NULL 值处理为 'NULL'（默认处理成空值。不建议勾选）</label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="mb-3 input-group" id="gen-insert-into-input-cond3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">修正 tenant_id 为</span>
+      </div>
+      <input type="number" class="form-control" placeholder="可直接指定 tenant_id，不支持多个。不填写则保留原样" id="gen-insert-into-input-3-tenant-id">
+    </div>
+    <div class="mt-3" id="gen-insert-into-input-cond4">
+      <div class="d-flex align-items-center input-group-prepend">
+        <span class="input-group-text">Raw Output</span>
+        <div class="gen-insert-into-prepend-option">
+          <input class="form-check-input" id="gen-insert-into-result-wrap" type="checkbox" checked>
+          <label class="form-check-label ms-1" for="gen-insert-into-result-wrap">截断换行</label>
+        </div>
+      </div>
+      <div class="blog-cond-container">
+        <textarea #rawOutput name="gen-insert-into-raw-output" id="gen-insert-into-raw-output" rows="15" class="form-control" style="width: 100%; border: none" placeholder="在此处输入原样查询结果" wrap="off">{{ exampleRawOutput }}</textarea>
+      </div>
+      <div class="mt-3 ground-control">
+        <button id="gen-insert-into-trigger" type="button" class="btn btn-success" (click)="genSQL()">🤹 Generate SQL</button>
+      </div>
+      <app-code-display #codeResult id="gen-insert-into-result" [code]="generatedSQL" language="sql"></app-code-display>
+    </div>
+  </div>
+  <div class="blog-paragraph">
+    <div class="blog-header-1">生产环境数据库信息</div>
+    <div class="blog-text-normal">以下信息可能会过时，建议定期维护（例如每个月检查一次即可），内容仅供参考。</div>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>集群名称</th>
+          <th>集群IP</th>
+          <th>数据库版本</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Doris元数据</td>
+          <td>172.16.11.3</td>
+          <td>8.0.25 MySQL Community Server</td>
+        </tr>
+        <tr>
+          <td>生产Doris（老集群）</td>
+          <td>172.16.13.53</td>
+          <td>doris-1.1.5-3608a29</td>
+        </tr>
+        <tr>
+          <td>生产Doris1（集群2）</td>
+          <td>172.16.21.130</td>
+          <td>doris-1.2.6-rc03-Unknown</td>
+        </tr>
+        <tr>
+          <td>生产Doris2（集群3）</td>
+          <td>172.16.21.137</td>
+          <td>doris-2.0.14-eaaf726019</td>
+        </tr>
+        <tr>
+          <td>生产Doris3（集群4）</td>
+          <td>172.16.21.165</td>
+          <td>doris-2.0.14-eaaf726019</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="blog-text-normal">具体环境变量可通过 <span class="blog-highlight-navy">SHOW VARIABLES [LIKE];</span> 查询。</div>
+  </div>
+</div>
+<div class="blog-end">(THE END)</div>
+<div class="blog-end-line"></div>

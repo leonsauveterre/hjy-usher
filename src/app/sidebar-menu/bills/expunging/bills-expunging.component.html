@@ -411,12 +411,12 @@
       <div class="blog-cond-container">
         <table class="blog-cond-border">
           <tbody>
-          <tr *ngFor="let cond of expunging0301Cond03">
-            <td *ngFor="let f of cond">
-              <input class="form-check-input" type="radio" [id]="f.id" name="expunging-bills-cond-3" [attr._taskStatus]="f.taskStatus" [checked]="f.checked" />
-              <label class="form-check-label ms-1" [for]="f.id">{{ f.label }}</label>
-            </td>
-          </tr>
+            <tr *ngFor="let cond of expunging0301Cond03">
+              <td *ngFor="let f of cond">
+                <input class="form-check-input" type="radio" [id]="f.id" name="expunging-bills-cond-3" [attr._taskStatus]="f.taskStatus" [checked]="f.checked" />
+                <label class="form-check-label ms-1" [for]="f.id">{{ f.label }}</label>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -432,16 +432,16 @@
       <div class="blog-cond-container">
         <table class="blog-cond-border">
           <tbody>
-          <tr style="height: 45px">
-            <td class="blog-right-align"><label for="bills-expunging-input-3-1-cond4-start-dt" class="form-label me-2">From</label></td>
-            <td class="d-flex">
-              <input id="bills-expunging-input-3-1-cond4-start-dt" type="datetime-local" [(ngModel)]="startDateTime" (change)="validateDateTime('start')" [max]="maxDateTime" class="form-control" />
-            </td>
-            <td class="blog-right-align"><label for="bills-expunging-input-3-1-cond4-end-dt" class="form-label ms-3 me-2">through</label></td>
-            <td class="d-flex">
-              <input id="bills-expunging-input-3-1-cond4-end-dt" type="datetime-local" [(ngModel)]="endDateTime" (change)="validateDateTime('end')" [max]="maxDateTime" class="form-control" />
-            </td>
-          </tr>
+            <tr style="height: 45px">
+              <td class="blog-right-align"><label for="bills-expunging-input-3-1-cond4-start-dt" class="form-label me-2">From</label></td>
+              <td class="d-flex">
+                <input id="bills-expunging-input-3-1-cond4-start-dt" type="datetime-local" [(ngModel)]="startDateTime" (change)="validateDateTime('start')" [max]="maxDateTime" class="form-control" />
+              </td>
+              <td class="blog-right-align"><label for="bills-expunging-input-3-1-cond4-end-dt" class="form-label ms-3 me-2">through</label></td>
+              <td class="d-flex">
+                <input id="bills-expunging-input-3-1-cond4-end-dt" type="datetime-local" [(ngModel)]="endDateTime" (change)="validateDateTime('end')" [max]="maxDateTime" class="form-control" />
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
