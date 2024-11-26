@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, Input, PLATFORM_ID, ViewChild } from '@angular/core';
-import { isPlatformBrowser, NgIf } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import * as Prism from 'prismjs';
 
 import 'prismjs/plugins/line-numbers/prism-line-numbers.js';
@@ -10,9 +10,7 @@ import 'prismjs/components/prism-sql';
   selector: 'app-code-display',
   templateUrl: './code-display.component.html',
   styleUrls: ['./code-display.component.css'],
-  imports: [
-    NgIf
-  ],
+  imports: [],
   standalone: true
 })
 export class CodeDisplayComponent implements AfterViewInit {
@@ -39,25 +37,22 @@ export class CodeDisplayComponent implements AfterViewInit {
     }
   }
 
-  copyToClipboard() {
-    // navigator.clipboard.writeText(this.code)
-    //   .then(
-    //     () => {
-    //       this.copied = true;
-    //       setTimeout(() => {
-    //         this.copied = false;
-    //       }, 2000);
-    //     },
-    //     (err) => console.error("Could not copy text: ", err)
-    //   );
+  copyToClipboard(): void {
     if (isPlatformBrowser(this.platformId)) {
-      const area = document.createElement('textarea');
-      area.innerHTML = this.code;
-      document.body.appendChild(area);
-      area.select();
-      document.execCommand('copy');  // for compatibility
-      document.body.removeChild(area);
-      this.copied = true;
+      try {
+        navigator.clipboard.writeText(this.code)
+          .then(() => {
+            this.copied = true;
+          });
+      } catch (e) {
+        const area = document.createElement('textarea');
+        area.innerHTML = this.code;
+        document.body.appendChild(area);
+        area.select();
+        document.execCommand('copy');  // for compatibility
+        document.body.removeChild(area);
+        this.copied = true;
+      }
       setTimeout(() => {
         this.copied = false;
       }, 2000);

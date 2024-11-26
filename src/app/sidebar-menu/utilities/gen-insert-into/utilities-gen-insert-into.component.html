@@ -1,6 +1,6 @@
 <div id="blog-gen-insert-into-container" class="blog-container mx-auto">
   <div class="blog-title">INSERT-INTO 生成器</div>
-  <div class="blog-sub-title">Leon Zhao | zhaoliang03&#64;huice.com, Nov 22, 2024<br>Last updated at: 14:59:36 (UTC+8), Nov 22, 2024</div>
+  <div class="blog-sub-title">Leon Zhao | zhaoliang03&#64;huice.com, Nov 22, 2024<br>Last updated at: 19:16:29 (UTC+8), Nov 26, 2024</div>
   <div class="blog-paragraph">
     <div class="blog-header-1">功能描述 & 使用方法</div>
     <div class="blog-text-normal">此功能旨在简化从原始数据库查询输出生成 SQL <span class="blog-highlight-navy">INSERT INTO</span> 语句的过程。用户需要提供表名，并将原始查询结果（例如从 MySQL 导出的数据）粘贴至文本框中，并配置可选项。然后，该方法将自动处理原始数据，并将其格式化为语法正确的 <span class="blog-highlight-navy">INSERT INTO</span> 语句。这样，迁移或备份数据就会变得很容易，在确保了一致性的同时节省了大量手动格式化的时间。</div>
@@ -9,9 +9,51 @@
     <div class="blog-header-1">Getting Started</div>
     <div class="mb-3 input-group" id="gen-insert-into-input-cond1">
       <div class="input-group-prepend">
-        <span class="input-group-text">表名</span>
+        <span class="input-group-text">数据库名及表名</span>
       </div>
-      <input type="text" class="form-control" placeholder="可输入任意字符串，支持子数据库前缀" id="gen-insert-into-input-2-table-name">
+
+      <!-- Editable Dropdown for Database Name -->
+      <div class="dropdown database-dropdown">
+        <input
+          type="text"
+          class="form-control"
+          id="gen-insert-into-input-2-database-name"
+          placeholder="Choose a database (negligible)"
+          autocomplete="off"
+          [(ngModel)]="databaseName"
+          (input)="onDatabaseNameInput()"
+        />
+        <div #databaseNameMenu class="dropdown-menu" id="databaseNameMenu" (mousedown)="preventClose($event)">
+          <button
+            class="dropdown-item"
+            type="button"
+            *ngFor="let database of databases"
+            (click)="selectOption($event, 'database')">
+            {{ database.name }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Editable Dropdown for Table Name -->
+      <div class="dropdown table-dropdown ms-2">
+        <input
+          type="text"
+          class="form-control"
+          id="gen-insert-into-input-2-table-name"
+          placeholder="Input a table name"
+          autocomplete="off"
+          [(ngModel)]="tableName"
+         />
+        <div #tableNameMenu class="dropdown-menu" id="tableNameMenu" (mousedown)="preventClose($event)">
+          <button
+            class="dropdown-item"
+            type="button"
+            *ngFor="let table of availableTables"
+            (click)="selectOption($event, 'table')">
+            {{ table }}
+          </button>
+        </div>
+      </div>
     </div>
     <div class="mt-3" id="gen-insert-into-input-cond2">
       <div class="d-flex align-items-center input-group-prepend">
@@ -58,13 +100,14 @@
       <div class="d-flex align-items-center input-group-prepend">
         <span class="input-group-text">Raw Output</span>
         <div class="gen-insert-into-prepend-option">
-          <input class="form-check-input" id="gen-insert-into-result-wrap" type="checkbox" checked>
+          <input class="form-check-input" id="gen-insert-into-result-wrap" [(ngModel)]="shouldWrap" (change)="toggleWrap()" type="checkbox">
           <label class="form-check-label ms-1" for="gen-insert-into-result-wrap">截断换行</label>
         </div>
       </div>
       <div class="blog-cond-container">
         <textarea #rawOutput name="gen-insert-into-raw-output" id="gen-insert-into-raw-output" rows="15" class="form-control" style="width: 100%; border: none" placeholder="在此处输入原样查询结果" wrap="off">{{ exampleRawOutput }}</textarea>
       </div>
+      <div class="blog-warning-small">⚠️ 第一、第三和最后一行（即分隔行）必须以“+-”开头，并以“-+”结尾。</div>
       <div class="mt-3 ground-control">
         <button id="gen-insert-into-trigger" type="button" class="btn btn-success" (click)="genSQL()">🤹 Generate SQL</button>
       </div>
@@ -113,5 +156,6 @@
     <div class="blog-text-normal">具体环境变量可通过 <span class="blog-highlight-navy">SHOW VARIABLES [LIKE];</span> 查询。</div>
   </div>
 </div>
+<app-caveat #caveat [message]="''"></app-caveat>
 <div class="blog-end">(THE END)</div>
 <div class="blog-end-line"></div>

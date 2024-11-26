@@ -1,6 +1,24 @@
 .gen-insert-into-prepend-option {
-  border: 2px solid #39c4e3;
+  border: 1px solid #0e68bd;
   border-radius: 5px;
   padding: 5px 10px;
   margin-left: 5px;
+}
+
+/* Parent container for dropdowns */
+.dropdown-container {
+  display: flex;
+  gap: 8px; /* Add spacing between the dropdowns */
+  width: 100%; /* Ensure it spans the available space */
+}
+
+/* Database dropdown (20% width) */
+.database-dropdown {
+  flex: 0 0 20%; /* Fixed width: 20% */
+  max-width: 20%; /* Prevent growth */
+}
+
+/* Table dropdown (80% width) */
+.table-dropdown {
+  flex: 1; /* Use remaining space */
 }
