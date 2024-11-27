@@ -31,7 +31,7 @@ export class UtilitiesGenInsertIntoComponent implements AfterViewInit {
 | 1357 | 兰溪市睿智办公用品有限公司-国内                |      2 |
 +------+------------------------------------------------+--------+`;
 
-  readonly exampleParsedOutput: string = `INSERT INTO \`hjy\`.\`tenant\` (id, name, status) VALUES
+  readonly exampleParsedOutput: string = `INSERT INTO hjy.tenant (id, name, status) VALUES
 ('1166', '揭阳市亿钢工贸有限公司-国内', '1'),
 ('1175', '扬州钛度体育用品厂-国内', '1'),
 ('1189', '深圳市雅琪家具有限公司-国内', '1'),
@@ -3649,7 +3649,7 @@ export class UtilitiesGenInsertIntoComponent implements AfterViewInit {
         }
 
         // Overwrite tenant_id if applicable
-        if (tenantId !== undefined && tenantIdIndex >= 0) {
+        if (tenantId !== undefined && !isNaN(tenantId) && tenantIdIndex >= 0) {
           row[tenantIdIndex] = tenantId.toString();
         }
 
@@ -3687,28 +3687,29 @@ export class UtilitiesGenInsertIntoComponent implements AfterViewInit {
   }
 
   genSQL(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      const databaseName = (document.getElementById('gen-insert-into-input-2-database-name') as HTMLInputElement).value.trim();
-      const tableName = (document.getElementById('gen-insert-into-input-2-table-name') as HTMLInputElement).value.trim();
-      const funcPrefix = 'gen-insert-into-input-cond2-opt';
-      const lowercaseKeywords = (document.getElementById(funcPrefix + '1') as HTMLInputElement).checked;
-      const generateMultipleStatements = (document.getElementById(funcPrefix + '2') as HTMLInputElement).checked;
-      const skipBrokenLines = (document.getElementById(funcPrefix + '3') as HTMLInputElement).checked;
-      const treatNullAsText = (document.getElementById(funcPrefix + '4') as HTMLInputElement).checked;
-      const tenantIdInput = document.getElementById('gen-insert-into-input-3-tenant-id') as HTMLInputElement;
-      this.generatedSQL = this.convertToInsertStatements(
-        this.generatedSQL,
-        databaseName,
-        tableName,
-        this.rawOutput.nativeElement.value,
-        lowercaseKeywords,
-        generateMultipleStatements,
-        skipBrokenLines,
-        treatNullAsText,
-        tenantIdInput ? parseInt(tenantIdInput.value) : undefined
-      );
-      this.cdr.detectChanges();
-      this.codeResult.rerender();
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
     }
+    const databaseName = (document.getElementById('gen-insert-into-input-2-database-name') as HTMLInputElement).value.trim();
+    const tableName = (document.getElementById('gen-insert-into-input-2-table-name') as HTMLInputElement).value.trim();
+    const funcPrefix = 'gen-insert-into-input-cond2-opt';
+    const lowercaseKeywords = (document.getElementById(funcPrefix + '1') as HTMLInputElement).checked;
+    const generateMultipleStatements = (document.getElementById(funcPrefix + '2') as HTMLInputElement).checked;
+    const skipBrokenLines = (document.getElementById(funcPrefix + '3') as HTMLInputElement).checked;
+    const treatNullAsText = (document.getElementById(funcPrefix + '4') as HTMLInputElement).checked;
+    const tenantIdInput = document.getElementById('gen-insert-into-input-3-tenant-id') as HTMLInputElement;
+    this.generatedSQL = this.convertToInsertStatements(
+      this.generatedSQL,
+      databaseName,
+      tableName,
+      this.rawOutput.nativeElement.value,
+      lowercaseKeywords,
+      generateMultipleStatements,
+      skipBrokenLines,
+      treatNullAsText,
+      tenantIdInput ? parseInt(tenantIdInput.value) : undefined
+    );
+    this.cdr.detectChanges();
+    this.codeResult.rerender();
   }
 }

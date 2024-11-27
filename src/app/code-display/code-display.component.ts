@@ -27,35 +27,37 @@ export class CodeDisplayComponent implements AfterViewInit {
   }
 
   rerender(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      this.cdr.detectChanges();
-      const codeElement = this.codeElement.nativeElement;
-      const preElement = codeElement.parentElement as HTMLElement;
-      preElement.classList.add('line-numbers');
-      codeElement.textContent = this.code;
-      Prism.highlightElement(codeElement);
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
     }
+    this.cdr.detectChanges();
+    const codeElement = this.codeElement.nativeElement;
+    const preElement = codeElement.parentElement as HTMLElement;
+    preElement.classList.add('line-numbers');
+    codeElement.textContent = this.code;
+    Prism.highlightElement(codeElement);
   }
 
   copyToClipboard(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      try {
-        navigator.clipboard.writeText(this.code)
-          .then(() => {
-            this.copied = true;
-          });
-      } catch (e) {
-        const area = document.createElement('textarea');
-        area.innerHTML = this.code;
-        document.body.appendChild(area);
-        area.select();
-        document.execCommand('copy');  // for compatibility
-        document.body.removeChild(area);
-        this.copied = true;
-      }
-      setTimeout(() => {
-        this.copied = false;
-      }, 2000);
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
     }
+    try {
+      navigator.clipboard.writeText(this.code)
+        .then(() => {
+          this.copied = true;
+        });
+    } catch (e) {
+      const area = document.createElement('textarea');
+      area.innerHTML = this.code;
+      document.body.appendChild(area);
+      area.select();
+      document.execCommand('copy');  // for compatibility
+      document.body.removeChild(area);
+      this.copied = true;
+    }
+    setTimeout(() => {
+      this.copied = false;
+    }, 2000);
   }
 }

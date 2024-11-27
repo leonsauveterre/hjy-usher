@@ -2,7 +2,7 @@
   <div style="background-image: url('/img/merry-christmas-horizontal-upper.jpg'); height: 60px; width: 100%; background-position-y: 1625px"></div>
   <div class="blog-title">账单删除任务</div>
   <div style="background-image: url('/img/merry-christmas-horizontal-lower.jpg'); height: 60px; width: 100%"></div>
-  <div class="blog-sub-title">Leon Zhao | zhaoliang03&#64;huice.com, Nov 12, 2024<br>Last updated at: 18:38:25 (UTC+8), Nov 13, 2024</div>
+  <div class="blog-sub-title">Leon Zhao | zhaoliang03&#64;huice.com, Nov 12, 2024<br>Last updated at: 14:50:08 (UTC+8), Nov 27, 2024</div>
   <div class="blog-paragraph">
     <div class="blog-header-1">1 概述</div>
     <div class="blog-text-normal">账单删除任务是为了应对用户错误导入数据而产生的，它可以删除用户导入的原始单及所有相关数据表（如标准单、分摊结果、日月汇总等）。和手动拉取任务一样，所有需要删除的条目都需要记录、排队，等待调度器逐个执行。</div>
@@ -390,11 +390,11 @@
                 <span class="toggle-icon">{{ subOption.expanded ? '➖' : '➕' }}</span>
               </div>
 
-              <!-- Layer 3 with Checkboxes -->
+              <!-- Layer 3 with checkboxes -->
               <div *ngIf="subOption.expanded && subOption.subOptions" class="sub-sub-options">
-                <div *ngFor="let subSubOption of subOption.subOptions">
+                <div *ngFor="let f of subOption.subOptions">
                   <label class="form-check-label ms-1" style="margin-bottom: 10px">
-                    <input [id]="subSubOption.id" class="form-check-input" type="checkbox" /> {{ subSubOption.label }}
+                    <input class="form-check-input" type="checkbox" [id]="f.id" [(ngModel)]="f.selected" [attr._subBillPlatform]="f.subBillPlatform" />{{ f.label }}
                   </label>
                 </div>
               </div>
@@ -402,7 +402,6 @@
           </div>
         </div>
       </div>
-
     </div>
     <div class="mt-3" id="bills-expunging-input-3-1-cond3">
       <div class="d-flex align-items-center input-group-prepend">

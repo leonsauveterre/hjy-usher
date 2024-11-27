@@ -263,19 +263,19 @@ input.form-check-input {
 }
 
 .expandable-label:hover {
-  background-color: #e0e0eb;
+  background-color: #ececf6;
 }
 
 .sub-options {
   margin-left: 24px;
-  border-left: 2px solid #e0e0eb;
+  border-left: 2px solid #dedeec;
   padding-left: 12px;
   width: 90%;
 }
 
 .sub-sub-options {
   margin-left: 24px;
-  border-left: 2px solid #cfcfd9;
+  border-left: 2px solid #bcbce4;
   padding-left: 12px;
   width: 80%;
 }
