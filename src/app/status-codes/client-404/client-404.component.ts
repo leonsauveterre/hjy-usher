@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-404',
-  standalone: true,
-  imports: [
-    RouterOutlet
-  ],
+  imports: [],
   templateUrl: './client-404.component.html',
   styleUrl: './client-404.component.css'
 })

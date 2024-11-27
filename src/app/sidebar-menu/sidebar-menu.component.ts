@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar-menu',
-  standalone: true,
   imports: [
     NgForOf,
     NgIf,

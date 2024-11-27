@@ -10,8 +10,7 @@ import 'prismjs/components/prism-sql';
   selector: 'app-code-display',
   templateUrl: './code-display.component.html',
   styleUrls: ['./code-display.component.css'],
-  imports: [],
-  standalone: true
+  imports: []
 })
 export class CodeDisplayComponent implements AfterViewInit {
   @Input() code: string = '';

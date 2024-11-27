@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-caveat',
-  standalone: true,
   imports: [],
   templateUrl: './caveat.component.html',
   styleUrl: './caveat.component.css'

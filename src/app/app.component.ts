@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Event, NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { NgClass, NgForOf, NgIf, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
 import Darkmode from 'darkmode-js';
 
@@ -10,13 +10,9 @@ import Darkmode from 'darkmode-js';
   styleUrls: ['./app.component.css'],
   imports: [
     RouterOutlet,
-    NgIf,
-    NgForOf,
-    NgClass,
     SidebarMenuComponent,
     NgOptimizedImage
-  ],
-  standalone: true
+  ]
 })
 export class AppComponent implements OnInit {
   darkmode?: Darkmode;

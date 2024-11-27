@@ -6,7 +6,6 @@ import { isPlatformBrowser, NgForOf } from '@angular/common';
 
 @Component({
   selector: 'app-bills-manual',
-  standalone: true,
   imports: [
     CodeDisplayComponent,
     FormsModule,

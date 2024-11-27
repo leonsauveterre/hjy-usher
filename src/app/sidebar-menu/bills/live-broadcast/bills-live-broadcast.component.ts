@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-live-broadcast',
-  standalone: true,
   imports: [],
   templateUrl: './bills-live-broadcast.component.html',
   styleUrl: './bills-live-broadcast.component.css'

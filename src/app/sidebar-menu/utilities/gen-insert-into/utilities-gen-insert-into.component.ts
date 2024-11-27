@@ -6,7 +6,6 @@ import { CaveatComponent } from '../../../caveat/caveat.component';
 
 @Component({
   selector: 'app-gen-insert-into',
-  standalone: true,
   imports: [
     CodeDisplayComponent,
     FormsModule,
@@ -3586,6 +3585,10 @@ export class UtilitiesGenInsertIntoComponent implements AfterViewInit {
     this.rawOutput.nativeElement.setAttribute('wrap', wrapMode);
   }
 
+  private pluralCheck(singular: string, plural: string, number: Number): string {
+    return number === 1 ? singular : plural;
+  }
+
   private convertToInsertStatements(
     fallback: string,
     databaseName: string,
@@ -3597,6 +3600,11 @@ export class UtilitiesGenInsertIntoComponent implements AfterViewInit {
     treatNullAsText: boolean = false,
     tenantId?: number
   ): string {
+    if (tableName === undefined || tableName === '') {
+      this.caveat.trigger('Table name should NOT be empty.', 'error')
+      return fallback;
+    }
+
     const rawLines = rawOutput.split("\n");
     const lines = rawLines.slice(1, rawLines.length - 1).map(line => line.trim());
     const columnNames = this.removeExtraSpaces(lines[0].substring(1, lines[0].length - 1).split('|')).map(e => e.trim());
@@ -3644,7 +3652,7 @@ export class UtilitiesGenInsertIntoComponent implements AfterViewInit {
             ++skippedLines;
             continue;
           }
-          this.caveat.trigger(`Expected ${columnSize} columns, but found ${row.length} columns on line#${i + 2}.`, 'error');
+          this.caveat.trigger(`Expected ${columnSize + ' ' + this.pluralCheck('column', 'columns', columnSize)}, but found ${row.length + ' ' + this.pluralCheck('column', 'columns', row.length)} on line#${i + 2}.`, 'error');
           return fallback;
         }
 
@@ -3677,7 +3685,7 @@ export class UtilitiesGenInsertIntoComponent implements AfterViewInit {
     }
 
     if (skippedLines > 0) {
-      this.caveat.trigger(`Skipped ${skippedLines} broken line(s).`, 'warning');
+      this.caveat.trigger(`Skipped ${skippedLines + ' broken ' + this.pluralCheck('line', 'lines', skippedLines)}.`, 'warning');
     }
     return result;
   }

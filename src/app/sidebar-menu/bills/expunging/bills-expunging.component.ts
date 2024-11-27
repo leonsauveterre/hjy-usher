@@ -23,7 +23,6 @@ interface SubOption {
 
 @Component({
   selector: 'app-bills-expunging',
-  standalone: true,
   imports: [
     FormsModule,
     NgForOf,
