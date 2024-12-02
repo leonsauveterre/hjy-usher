@@ -37,6 +37,35 @@ export class BillsExpungingComponent {
   private presetStatements: readonly string[] = [
     `SELECT *
 FROM bill_import_delayed_deletion`,
+
+    `SELECT tenant_id, COUNT(*)
+FROM bill_import_delayed_deletion
+WHERE task_status < 4
+   OR task_status >= 92
+GROUP BY tenant_id
+ORDER BY tenant_id`,
+
+    `SELECT tenant_id, import_channel_platform, sub_bill_platform, COUNT(*)
+FROM bill_import_delayed_deletion
+WHERE task_status < 4
+   OR task_status >= 92
+GROUP BY tenant_id, import_channel_platform, sub_bill_platform
+ORDER BY tenant_id, import_channel_platform, sub_bill_platform`,
+
+    `SELECT tenant_id, import_channel_platform, sub_bill_platform, task_status, COUNT(*)
+FROM bill_import_delayed_deletion
+WHERE task_status < 4
+   OR task_status >= 92
+GROUP BY tenant_id, import_channel_platform, sub_bill_platform, task_status
+ORDER BY tenant_id, import_channel_platform, sub_bill_platform, task_status`,
+
+    `SELECT id, tenant_id, shop_id, batch_number, import_status,
+       IF(import_status = '6', '', ' -- ABNORMAL -- ') AS PROMPT
+FROM bill_import_basic_info WHERE id IN (
+    SELECT bibi_id
+    FROM bill_import_delayed_deletion
+    WHERE DATE(created_at) = CURDATE()
+)`
   ];
 
   constructor(private cdr: ChangeDetectorRef, @Inject(PLATFORM_ID) private platformId: Object) {
@@ -433,4 +462,15 @@ FROM bill_import_delayed_deletion`,
     this.cdr.detectChanges();
     this.codeResult0301.rerender();
   }
+
+  // 3.2
+  @ViewChild('codeResult0302A') codeResult0302A!: CodeDisplayComponent;
+  @ViewChild('codeResult0302B') codeResult0302B!: CodeDisplayComponent;
+  @ViewChild('codeResult0302C') codeResult0302C!: CodeDisplayComponent;
+  @ViewChild('codeResult0302D') codeResult0302D!: CodeDisplayComponent;
+
+  generatedSQL0302A: string = this.presetStatements[1] + ';';
+  generatedSQL0302B: string = this.presetStatements[2] + ';';
+  generatedSQL0302C: string = this.presetStatements[3] + ';';
+  generatedSQL0302D: string = this.presetStatements[4] + ';';
 }

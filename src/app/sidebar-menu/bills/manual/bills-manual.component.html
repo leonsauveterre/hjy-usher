@@ -2,7 +2,7 @@
   <div style="background-image: url('/img/merry-christmas-horizontal-upper.jpg'); height: 60px; width: 100%; background-position-y: 1625px"></div>
   <div class="blog-title">手动拉取任务</div>
   <div style="background-image: url('/img/merry-christmas-horizontal-lower.jpg'); height: 60px; width: 100%"></div>
-  <div class="blog-sub-title">Leon Zhao | zhaoliang03&#64;huice.com, Nov 06, 2024<br>Last updated at: 18:35:39 (UTC+8), Nov 13, 2024</div>
+  <div class="blog-sub-title">Leon Zhao | zhaoliang03&#64;huice.com, Nov 06, 2024<br>Last updated at: 17:46:03 (UTC+8), Dec 02, 2024</div>
   <div class="blog-paragraph">
     <div class="blog-header-1">1 概述</div>
     <div class="blog-text-normal">手动拉取任务是为了弥补系统拉取任务没有拉取到的数据而诞生的，不适用于大量任务创建，也不能保证数据一定会补拉到，只是给用户提供手动拉取账单的入口，需要用户自行保证数据完整。</div>
@@ -148,7 +148,12 @@
         </tr>
         <tr>
           <td>22</td>
-          <td>京东优惠券（此时该任务一定配有 <span class="blog-highlight-navy">pull_type</span> 为 21 的任务，配比 1:1）</td>
+          <td>
+            <div>京东优惠券（此时该任务一定配有 <span class="blog-highlight-navy">pull_type</span> 为 21 的任务，配比 1:1）</div>
+            <div style="margin-top: 10px;">
+              <span style="background: #ffd8d4; border: 2px solid #ff5d5d; border-radius: 6px; padding: 5px 8px;">⛔ 订单优惠券明细接口已于 2024 年 11 月 25 日下线，新接口暂未选定为视野范围内需求。</span>
+            </div>
+          </td>
         </tr>
         <tr>
           <td>30</td>
@@ -164,11 +169,27 @@
         </tr>
         <tr>
           <td>60</td>
-          <td>京准通</td>
+          <td>京准通（原京准达）</td>
+        </tr>
+        <tr>
+          <td>70</td>
+          <td>互动广告（原京东展位，京准通的一部分）</td>
+        </tr>
+        <tr>
+          <td>80</td>
+          <td>京东直投（现为站外广告直投和京易投的结合体，均为京准通的一部分，暂不更名）</td>
+        </tr>
+        <tr>
+          <td>90</td>
+          <td>推荐广告（原购物触点，京准通的一部分）</td>
+        </tr>
+        <tr>
+          <td>100</td>
+          <td>智能投放（原京速推，京准通的一部分）</td>
         </tr>
         <tr>
           <td>110</td>
-          <td>京东快车-到链接（暂未开发，待定中）</td>
+          <td>搜索快车（原京东快车，京准通的一部分）</td>
         </tr>
         <tr>
           <td>120</td>
@@ -197,6 +218,10 @@
         <tr>
           <td>180</td>
           <td>小红书人工调账</td>
+        </tr>
+        <tr>
+          <td>190</td>
+          <td>搜索快车新接口（到规格）</td>
         </tr>
       </tbody>
     </table>
@@ -293,6 +318,10 @@
         <tr>
           <td>平台限流严重，当前任务无法继续进行</td>
           <td>仅供京准通任务用</td>
+        </tr>
+        <tr>
+          <td>小红书接口异常导致请求失败，请稍后重试</td>
+          <td>仅供小红书任务用（平台未明确具体原因）</td>
         </tr>
         <tr>
           <td>未找到当前账号下已授权店铺</td>

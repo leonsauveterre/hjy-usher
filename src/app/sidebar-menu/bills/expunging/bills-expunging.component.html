@@ -447,10 +447,28 @@
       <div class="blog-warning-small">⚠️ 系统不会校验开始时间和结束时间的先后，MySQL 也不会报错（可识别 T 表示法），需要自行保证。另外，若不进行任何时间选择，则会忽略该条件。</div>
     </div>
     <div class="mt-3 ground-control">
-      <button id="bills-manual-input-3-1-trigger" type="button" class="btn btn-success" (click)="genSQLS03E01()">🤹 Generate SQL</button>
+      <button id="bills-expunging-input-3-1-trigger" type="button" class="btn btn-success" (click)="genSQLS03E01()">🤹 Generate SQL</button>
     </div>
     <app-code-display #codeResult0301 id="bills-expunging-input-3-1-result" [code]="generatedSQL0301" language="sql"></app-code-display>
     <div class="blog-header-2">3.2 总体任务信息查询</div>
+    <div class="blog-text-normal"><span class="blog-highlight-canary">未完成任务总数（按租户分组）</span></div>
+    <app-code-display #codeResult0302A id="bills-expunging-input-3-2-result-A" [code]="generatedSQL0302A" language="sql"></app-code-display>
+    <div class="blog-paragraph-break"></div>
+    <div class="blog-text-normal"><span class="blog-highlight-canary">未完成任务总数（按租户、任务类型分组）</span></div>
+    <app-code-display #codeResult0302B id="bills-expunging-input-3-2-result-B" [code]="generatedSQL0302B" language="sql"></app-code-display>
+    <div class="blog-paragraph-break"></div>
+    <div class="blog-text-normal"><span class="blog-highlight-canary">未完成任务总数（按租户、任务类型、任务状态分组）</span></div>
+    <app-code-display #codeResult0302C id="bills-expunging-input-3-2-result-C" [code]="generatedSQL0302C" language="sql"></app-code-display>
+    <div class="blog-paragraph-break"></div>
+    <div class="blog-text-normal"><span class="blog-highlight-canary">查看今日任务是否已令导入基础表状态变更</span></div>
+    <app-code-display #codeResult0302C id="bills-expunging-input-3-2-result-D" [code]="generatedSQL0302D" language="sql"></app-code-display>
+    <div class="blog-header-2">3.3 常见问题及解决方案</div>
+    <div class="blog-header-3">3.3.1 任务迟迟无法开始执行</div>
+    <div class="blog-text-normal">Something</div>
+    <div class="blog-header-3">3.3.2 任务迟迟无法结束</div>
+    <div class="blog-text-normal">Something</div>
+    <div class="blog-header-3">3.3.3 任务完成后数据仍然存在</div>
+    <div class="blog-text-normal">Something</div>
   </div>
 </div>
 <div class="blog-end">(THE END)</div>

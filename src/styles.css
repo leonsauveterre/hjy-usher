@@ -163,7 +163,6 @@ body {
 .blog-deprecation {
   text-decoration: line-through;
   text-decoration-style: dashed;
-  font-style: italic;
   font-weight: bold;
 }
 
