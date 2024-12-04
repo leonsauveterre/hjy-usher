@@ -164,6 +164,7 @@ body {
   text-decoration: line-through;
   text-decoration-style: dashed;
   font-weight: bold;
+  color: gray;
 }
 
 .blog-cond-container {

@@ -1,1 +1,58 @@
-<p>logs works!</p>
+<div id="blog-bills-logs-container" class="blog-container mx-auto">
+  <div class="blog-title">操作日志</div>
+  <div class="blog-sub-title">Leon Zhao | zhaoliang03&#64;huice.com, Nov 22, 2024<br>Last updated at: 17:16:11 (UTC+8), Dec 04, 2024</div>
+  <div class="blog-paragraph">
+    <div class="blog-header-1">本文会记录什么</div>
+    <div class="blog-text-normal">本文主要包括 <span class="blog-highlight-navy">账单操作日志</span> 以及 <span class="blog-highlight-navy">授权日志</span> 的 <span class="blog-highlight-navy">类型</span> 和 <span class="blog-highlight-navy">摘要</span> 枚举，其他内容如有需要，后期可以随时添加。</div>
+  </div>
+  <div id="blog-bills-logs-module-op" class="blog-paragraph">
+    <div class="blog-header-1">账单操作日志</div>
+    <div class="blog-header-2">类型</div>
+    <div id="logs-op-type" class="blog-module-container">
+      <div class="search-bar">
+        <input type="text" [(ngModel)]="searchTerm" class="form-control" placeholder="Search anything here"/>
+      </div>
+
+      <div class="filter-section">
+        <label for="categories">Category:</label>
+        <select [(ngModel)]="selectedCategory" class="form-select" id="categories">
+          <option value="">All</option>
+          <option *ngFor="let category of opCategories" [value]="category">{{ category }}</option>
+        </select>
+      </div>
+
+      <table class="table table-hover table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>typeId</th>
+            <th>typeName</th>
+            <th>platformAlias</th>
+            <th>Category</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let f of filterOpTypes">
+            <td class="logs-identifier">{{ f.identifier }}</td>
+            <td>{{ f.scene }}</td>
+            <td>{{ f.platformAlias }}</td>
+            <td>{{ f.category }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="blog-header-2">摘要</div>
+    <div id="logs-op-summary" class="blog-module-container">
+    </div>
+  </div>
+
+  <div id="blog-bills-logs-module-auth" class="blog-paragraph">
+    <div class="blog-header-1">授权日志</div>
+    <div class="blog-header-2">类型</div>
+    <div id="logs-auth-type" class="blog-module-container">
+    </div>
+    <div class="blog-header-2">摘要</div>
+    <div id="logs-auth-summary" class="blog-module-container">
+    </div>
+  </div>
+</div>

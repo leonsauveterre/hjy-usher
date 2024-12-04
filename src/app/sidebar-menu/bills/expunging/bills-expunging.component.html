@@ -2,7 +2,7 @@
   <div style="background-image: url('/img/merry-christmas-horizontal-upper.jpg'); height: 60px; width: 100%; background-position-y: 1625px"></div>
   <div class="blog-title">账单删除任务</div>
   <div style="background-image: url('/img/merry-christmas-horizontal-lower.jpg'); height: 60px; width: 100%"></div>
-  <div class="blog-sub-title">Leon Zhao | zhaoliang03&#64;huice.com, Nov 12, 2024<br>Last updated at: 14:50:08 (UTC+8), Nov 27, 2024</div>
+  <div class="blog-sub-title">Leon Zhao | zhaoliang03&#64;huice.com, Nov 12, 2024<br>Last updated at: 16:03:14 (UTC+8), Dec 04, 2024</div>
   <div class="blog-paragraph">
     <div class="blog-header-1">1 概述</div>
     <div class="blog-text-normal">账单删除任务是为了应对用户错误导入数据而产生的，它可以删除用户导入的原始单及所有相关数据表（如标准单、分摊结果、日月汇总等）。和手动拉取任务一样，所有需要删除的条目都需要记录、排队，等待调度器逐个执行。</div>
@@ -255,7 +255,7 @@
         </tr>
         <tr>
           <td>pdd_search_bill</td>
-          <td>营销账单 - 拼多多 - 多多搜索</td>
+          <td><span class="blog-deprecation">营销账单 - 拼多多 - 多多搜索</span>（菜单已下线）</td>
         </tr>
         <tr>
           <td>pdd_shop_bill</td>
@@ -263,7 +263,7 @@
         </tr>
         <tr>
           <td>pdd_scenes_bill</td>
-          <td>营销账单 - 拼多多 - 多多场景</td>
+          <td><span class="blog-deprecation">营销账单 - 拼多多 - 多多场景</span>（菜单已下线）</td>
         </tr>
         <tr>
           <td>pdd_promote_bill</td>
@@ -464,11 +464,23 @@
     <app-code-display #codeResult0302C id="bills-expunging-input-3-2-result-D" [code]="generatedSQL0302D" language="sql"></app-code-display>
     <div class="blog-header-2">3.3 常见问题及解决方案</div>
     <div class="blog-header-3">3.3.1 任务迟迟无法开始执行</div>
-    <div class="blog-text-normal">Something</div>
+    <div class="blog-text-normal">1️⃣ 若任务状态始终为 <span class="blog-highlight-navy">待执行</span>，先利用 #3.2 中的 SQL 语句查询待执行的任务总共有多少，以及是否时刻存在状态小于 4 或大于等于 92 的任务。若是，则说明任务正在排队，需要耐心等待；若不是，继续阅读。</div>
+    <div class="blog-text-normal">2️⃣ 线上任务始终定时执行，除非有特殊情况会临时关闭任务调度，可先前往 🐬 Dolphin Scheduler 查看名为 <span class="blog-highlight-navy">
+账单删除-Expunction</span> (#2302) 的任务是否已标记 <span class="blog-highlight-navy">ONLINE</span>。若标记 <span class="blog-highlight-navy">OFFLINE</span> 或无任何标记，第一时间向产研询问具体情况。若调度正常，且不存在串行抛弃、资源受限等问题，继续阅读。</div>
+    <div class="blog-text-normal">3️⃣ 让研发根据代码打印日志的位置检查是否有报错信息，并确认任务状态是否为 3。如果状态为 3，可利用 <span class="blog-highlight-navy">id</span> 或 <span class="blog-highlight-navy">bibi_id</span> 去报警群搜索相关信息，并根据提示对应处理；若应用正常，但 Flink 或 Doris 出现异常，可联系基建处理，研发可能需要重置任务状态。</div>
+    <div class="blog-question-title">🤨 Dolphin Scheduler 中三个账单删除任务是做什么用的？</div>
+    <div class="alert alert-success blog-question-body">🙋‍♂️ （1）账单删除-Expunction (#2302) 用于删除状态为 0、92、93、94 的任务，这是最常用的任务，暂定每 17 分钟执行一次。数据被清空后，任务不算完成，等回调经分结束后任务才算真正完成；（2）账单删除-Forceful-Expunction (#2303) 仅用于删除状态为 92 的任务，不能开启定时，否则可能会和任务（1）产生冲突，甚至有一定概率造成某个任务同时被两个任务流消费；（3）账单删除-验证-Expunction-Verification (#2870) 用于验证状态为 4 的任务是否已删除所有相关数据，并设置 <span class="blog-highlight-navy">verified_at</span> 和 <span class="blog-highlight-navy">proof</span>。该任务比较智能，只判断创建时间及之前要删除的数据是否已经清除，定时自定执行，因此无需过度关心此任务。如果校验失败，报警群会有通知，并提示解决方案。</div>
+    <div class="blog-question-title">🤨 如果用户想要大量/批量删除已导入的账单应该如何快速处理？</div>
+    <div class="alert alert-success blog-question-body">🙋‍♂️ 若要删除的账单数（指导入记录数）不超过 500，建议让客户直接在页面上批量删除，然后排队即可。若超过 500 条，建议提工单直接删除对应账单类型和时间段的数据，然后将导入记录直接置为已删除 <span class="blog-highlight-navy">import_status = 6</span> 。若数量很多但用户已经发起了删除任务，在客户着急的情况下，可临时停止 <span class="blog-highlight-navy">账单删除-Expunction</span> (#2302) 任务调度，并执行 <span class="blog-highlight-navy">账单删除-Forceful-Expunction</span> (#2303) ，研发可通过报警群关注执行情况。等任务结束后，重新开启原任务调度即可。🚨 这种做法可能会影响其他任务的完成时间，可提前检查任务排队情况。在必要情况下，将部分无关任务置成 92 也是可行的。Desperate times call for desperate measures.</div>
+    <div class="blog-question-title">🤨 任务调度时用户是如何排上队的？</div>
+    <div class="alert alert-success blog-question-body">🙋‍♂️ 参见手动拉取任务#3.3.1 的 Q & A Box。</div>
     <div class="blog-header-3">3.3.2 任务迟迟无法结束</div>
-    <div class="blog-text-normal">Something</div>
+    <div class="blog-text-normal">1️⃣ 检查无法结束的任务状态是否为 3，此时应优先通过报警群检查 Doge 的消息，并根据提示合理处理任务；若不是，继续阅读。</div>
+    <div class="blog-text-normal">2️⃣ 检查排队的任务情况。若还有其他任务待执行，耐心等待即可；若任务很少或没有，继续阅读。</div>
+    <div class="blog-text-normal">3️⃣ 让研发检查线上任务是否调度正常、基建是否功能正常。若意外情况导致功能暂不可用，可手动删除对应数据，并通知经分，随后修改导入表状态。</div>
     <div class="blog-header-3">3.3.3 任务完成后数据仍然存在</div>
-    <div class="blog-text-normal">Something</div>
+    <div class="blog-text-normal">1️⃣ “任务完成”指的是状态已变更为 4，然后检查校验任务的执行情况。若 <span class="blog-highlight-navy">proof</span> 不为 <span class="blog-highlight-navy">PASSED</span> 或诸如 <span class="blog-highlight-navy">PASSED-*</span> 的格式，立刻检查报警群的详细信息。若根据删除任务打印的原始 SQL 语句查询出的数据均为未被删除的数据或脏数据，将状态置为 92 即可；否则可检查数据的最小创建时间是否在删除开始时间之后：若是，则说明表中的数据是后产生的，此时为正常情况，无需任何操作；若不是，直接将状态 92，并在删除完成后进行手动校验日汇总等数据是否一致即可。若上述条件均不成立或不适用，继续阅读。</div>
+    <div class="blog-text-normal">2️⃣ 让研发根据 Kibana 日志查询 Doris 的数据删除情况，检查任务实际执行的 SQL 语句是否和报警群一致，并顺便检查是否有数据库报错，必要时需要找基建配合排查。若由于数据库压力过大等原因导致删除前的查询失败，可直接将任务状态置成 0 重试。</div>
   </div>
 </div>
 <div class="blog-end">(THE END)</div>
