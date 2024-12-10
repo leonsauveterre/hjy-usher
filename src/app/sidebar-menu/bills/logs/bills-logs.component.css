@@ -7,6 +7,32 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+.blog-header-2 {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  padding-top: 10px;
+}
+
+.scroll-btn {
+  margin: 10px 5px 10px 15px;
+  padding: 8px 15px;
+  background-color: #5199e6;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.scroll-btn:hover {
+  background-color: #296bba;
+}
+
+.scroll-btn:active {
+  background-color: #084688;
+}
+
 .search-bar {
   margin-bottom: 15px;
 }
@@ -37,7 +63,7 @@
 
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
   color-rendering: optimizeQuality;
-  background-color: #dbeeff !important;
+  background-color: #ecffd2 !important;
 }
 
 .logs-identifier {
