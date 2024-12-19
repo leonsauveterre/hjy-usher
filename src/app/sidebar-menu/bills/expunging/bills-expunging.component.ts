@@ -426,7 +426,7 @@ FROM bill_import_basic_info WHERE id IN (
     }
 
     if (condSubBillPlatforms !== '' && condImportChannelPlatforms !== '') {
-      conditions.push(`(${condSubBillPlatforms}) OR (${condImportChannelPlatforms})`);
+      conditions.push(`(${condSubBillPlatforms} OR ${condImportChannelPlatforms})`);
     } else if (condSubBillPlatforms !== '') {
       conditions.push(condSubBillPlatforms);
     } else if (condImportChannelPlatforms !== '') {
