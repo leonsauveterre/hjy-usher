@@ -94,7 +94,14 @@
       <div class="input-group-prepend">
         <span class="input-group-text">修正 tenant_id 为</span>
       </div>
-      <input type="number" class="form-control" placeholder="可直接指定 tenant_id，不支持多个。不填写则保留原样" id="gen-insert-into-input-3-tenant-id">
+      <input type="number" class="form-control" placeholder="可直接指定 tenant_id，不支持多个。不填写则保留原样" id="gen-insert-into-input-3-tenant-id"
+             [(ngModel)]="rawTenantId" (ngModelChange)="onTenantIdChange($event)">
+    </div>
+    <div class="mb-3 input-group" id="gen-insert-into-input-cond3-sidekick">
+      <div class="input-group-prepend">
+        <span class="input-group-text">修正 erp_number 为</span>
+      </div>
+      <input type="text" class="form-control" placeholder="可自动根据 tenant_id 生成 erp_number，也可直接指定。不填写则保留原样" id="gen-insert-into-input-3-erp-number" [(ngModel)]="rawErpNumber">
     </div>
     <div class="mt-3" id="gen-insert-into-input-cond4">
       <div class="d-flex align-items-center input-group-prepend">

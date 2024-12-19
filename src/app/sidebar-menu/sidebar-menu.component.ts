@@ -17,7 +17,7 @@ export class SidebarMenuComponent {
     {
       id: 'menu-bills',
       name: '账单模块',
-      expanded: false,
+      expanded: true,
       subfuncs: [
         {
           id: 'menu-bills-manual',
@@ -40,7 +40,7 @@ export class SidebarMenuComponent {
     {
       id: 'menu-expenses',
       name: '费用模块',
-      expanded: false,
+      expanded: true,
       subfuncs: [
         {
           id: 'menu-expenses-items',
@@ -51,7 +51,7 @@ export class SidebarMenuComponent {
     {
       id: 'menu-utilities',
       name: '实用工具',
-      expanded: false,
+      expanded: true,
       subfuncs: [
         {
           id: 'menu-utilities-guidance',
@@ -66,7 +66,7 @@ export class SidebarMenuComponent {
     {
       id: 'menu-others',
       name: '其他',
-      expanded: false,
+      expanded: true,
       subfuncs: [
         {
           id: 'menu-others-declarations',
