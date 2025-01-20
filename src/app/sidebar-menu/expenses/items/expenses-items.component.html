@@ -1,4 +1,37 @@
-<div id="blog-gen-insert-into-container" class="blog-container mx-auto">
+<div id="blog-expenses-items-container" class="blog-container mx-auto">
   <div class="blog-title">费用项</div>
-  <div class="blog-sub-title">Leon Zhao | zhaoliang03&#64;huice.com, Jan 20, 2025<br>Last updated at: 15:52:48 (UTC+8), Jan 20, 2025</div>
+  <div class="blog-sub-title">Leon Zhao | zhaoliang03&#64;huice.com, Jan 20, 2025<br>Last updated at: 18:43:18 (UTC+8), Jan 20, 2025</div>
+  <div class="blog-paragraph">
+    <div class="blog-header-1">本文会记录什么</div>
+    <div class="blog-text-normal">本文主要包括 <span class="blog-highlight-navy">bill_enum</span> 表中的特殊费用项（其实是功能配置项），用户无法访问，而且与子表（bill_enum_sub）无关。其他内容如有需要，后期可以随时添加。</div>
+  </div>
+  <div id="blog-expenses-items-op" class="blog-paragraph">
+    <div class="blog-header-1">特殊费用项</div>
+    <div class="blog-header-2">是否显示刷新按钮</div>
+    <div class="blog-text-normal"><span class="blog-highlight-navy">enum_name = 'is_show_refresh_button'</span> 用于控制页面是否显示刷新按钮，利用 <span class="blog-highlight-navy">enum_message</span> （true 或 false）字段控制具体值。</div>
+    <app-code-display [code]="this.presetStatements[0]" language="sql"></app-code-display>
+    <div class="blog-header-2">是否开放时间限制</div>
+    <div class="blog-text-normal"><span class="blog-highlight-navy">enum_name = 'is_open_time'</span> 用于控制是否开放导入、回刷等操作的时间限制，利用 <span class="blog-highlight-navy">enum_message</span> （true 或 false）和 <span class="blog-highlight-navy">remark</span> （英文逗号分隔）字段共同控制具体值。</div>
+    <app-code-display [code]="this.presetStatements[1]" language="sql"></app-code-display>
+    <div class="blog-header-2">标记标准单数量限制</div>
+    <div class="blog-text-normal"><span class="blog-highlight-navy">enum_name = 'mark_standard_limit'</span> 用于控制标准单最大数量（上限），利用 <span class="blog-highlight-navy">enum_code</span> 字段控制具体值。</div>
+    <app-code-display [code]="this.presetStatements[2]" language="sql"></app-code-display>
+    <div class="blog-header-2">标记账号数量限制</div>
+    <div class="blog-text-normal"><span class="blog-highlight-navy">enum_name = 'mark_account_limit'</span> 用于控制账号最大数量（上限），利用 <span class="blog-highlight-navy">enum_code</span> 字段控制具体值。</div>
+    <app-code-display [code]="this.presetStatements[3]" language="sql"></app-code-display>
+    <div class="blog-header-2">标记标准单总数量限制</div>
+    <div class="blog-text-normal"><span class="blog-highlight-navy">enum_name = 'mark_total_standard_limit'</span> 用于控制标准单总数量最大值（上限），利用 <span class="blog-highlight-navy">enum_code</span> 字段控制具体值。</div>
+    <app-code-display [code]="this.presetStatements[4]" language="sql"></app-code-display>
+    <div class="blog-header-2">标记账号总数量限制</div>
+    <div class="blog-text-normal"><span class="blog-highlight-navy">enum_name = 'mark_total_account_limit'</span> 用于控制账号总数量最大值（上限），利用 <span class="blog-highlight-navy">enum_code</span> 字段控制具体值。</div>
+    <app-code-display [code]="this.presetStatements[5]" language="sql"></app-code-display>
+    <div class="blog-header-2">将某些存在于金额字段的不可解析值归零</div>
+    <div class="blog-text-normal"><span class="blog-highlight-navy">enum_name = 'tolerable_abnormal_decimal'</span> 用于将导入账单时遇到的特殊金额字符串转为零，利用 <span class="blog-highlight-navy">remark</span> （英文逗号分隔）字段控制具体值。</div>
+    <app-code-display [code]="this.presetStatements[6]" language="sql"></app-code-display>
+    <div class="blog-header-2">某些租户导入自定义营销账单时不进行已有时间校验</div>
+    <div class="blog-text-normal"><span class="blog-highlight-navy">enum_name = 'custom_marketing_import_trustworthy'</span> 用于取消某些租户导入自定义营销账单时的时间限制，利用 <span class="blog-highlight-navy">remark</span> （英文逗号分隔）字段控制具体值。</div>
+    <app-code-display [code]="this.presetStatements[7]" language="sql"></app-code-display>
+  </div>
 </div>
+<div class="blog-end">(THE END)</div>
+<div class="blog-end-line"></div>
