@@ -23,17 +23,19 @@ export class HighlightBreezeDirective {
     this.renderer.setStyle(this.el.nativeElement, 'background-color', '#dbedff');
     // copy the text to clipboard
     const text = this.el.nativeElement.innerText;
-    navigator.clipboard.writeText(text).then(
-      () => {},
-      (_: any) => {
-        const area = document.createElement('textarea');
-        area.innerHTML = text;
-        document.body.appendChild(area);
-        area.select();
-        document.execCommand('copy');
-        document.body.removeChild(area);
-      }
-    );
+    try {
+      navigator.permissions.query({ name: 'clipboard-write' as PermissionName }).then(permissionStatus => {
+        console.log(`Clipboard write permission: ${permissionStatus.state}`);
+      });
+      navigator.clipboard.writeText(text);
+    } catch (e) {
+      const area = document.createElement('textarea');
+      area.value = text;
+      document.body.appendChild(area);
+      area.select();
+      document.execCommand('copy');
+      document.body.removeChild(area);
+    }
 
     this.el.nativeElement.innerText = '🫡 Copied!';
     setTimeout(() => {
