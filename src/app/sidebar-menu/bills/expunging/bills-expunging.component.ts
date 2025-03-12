@@ -172,6 +172,15 @@ FROM bill_import_basic_info WHERE id IN (
             { id: 'manual-expunging-cond-2-cb8', label:'贷款结算单', expanded: false, importChannelPlatform: 'xmyp_money', subBillPlatform: 'pay_settlement_bill', selected: false }
           ]
         },
+        {
+          label: '小红书',
+          expanded: false,
+          subOptions: [
+            { id: 'manual-expunging-cond-2-cb27', label:'订单货款', expanded: false, importChannelPlatform: 'xhs_money', subBillPlatform: '9956', selected: false },
+            { id: 'manual-expunging-cond-2-cb28', label:'其他服务款', expanded: false, importChannelPlatform: 'xhs_money', subBillPlatform: '9856', selected: false },
+            { id: 'manual-expunging-cond-2-cb29', label:'人工调账', expanded: false, importChannelPlatform: 'xhs_money', subBillPlatform: '9756', selected: false }
+          ]
+        }
       ]
     },
     {

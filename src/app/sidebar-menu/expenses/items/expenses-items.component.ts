@@ -42,6 +42,10 @@ WHERE enum_name = 'tolerable_abnormal_decimal';`,
     `SELECT *
 FROM bill_enum
 WHERE enum_name = 'custom_marketing_import_trustworthy';`,
+
+    `SELECT *
+FROM bill_enum
+WHERE enum_name = 'privatize_rules_for';`
   ];
 
 }

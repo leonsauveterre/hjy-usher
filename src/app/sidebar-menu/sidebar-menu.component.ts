@@ -60,6 +60,14 @@ export class SidebarMenuComponent {
         {
           id: 'menu-utilities-gen-insert-into',
           name: 'INSERT-INTO 生成器'
+        },
+        {
+          id: 'menu-utilities-raw-retrieval',
+          name: 'Token 刷新与原始单获取'
+        },
+        {
+          id: 'menu-utilities-concentration',
+          name: '时间管理'
         }
       ]
     },

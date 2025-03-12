@@ -9,6 +9,8 @@ import { BillsLiveBroadcastComponent } from './sidebar-menu/bills/live-broadcast
 import { BillsLogsComponent } from './sidebar-menu/bills/logs/bills-logs.component';
 import { UtilitiesGuidanceComponent } from './sidebar-menu/utilities/guidance/utilities-guidance.component';
 import { UtilitiesGenInsertIntoComponent } from './sidebar-menu/utilities/gen-insert-into/utilities-gen-insert-into.component';
+import { UtilitiesRawRetrievalComponent } from './sidebar-menu/utilities/raw-retrieval/utilities-raw-retrieval.component';
+import { UtilitiesConcentrationComponent } from './sidebar-menu/utilities/concentration/utilities-concentration.component';
 import { OthersDeclarationsComponent } from './sidebar-menu/others/declarations/others-declarations.component';
 import { OthersAboutComponent } from './sidebar-menu/others/about/others-about.component';
 
@@ -22,6 +24,8 @@ export const routes: Routes = [
   { path: 'nvg-menu-expenses-items', component: ExpensesItemsComponent },
   { path: 'nvg-menu-utilities-guidance', component: UtilitiesGuidanceComponent },
   { path: 'nvg-menu-utilities-gen-insert-into', component: UtilitiesGenInsertIntoComponent },
+  { path: 'nvg-menu-utilities-raw-retrieval', component: UtilitiesRawRetrievalComponent },
+  { path: 'nvg-menu-utilities-concentration', component: UtilitiesConcentrationComponent },
   { path: 'nvg-menu-others-declarations', component: OthersDeclarationsComponent },
   { path: 'nvg-menu-others-about', component: OthersAboutComponent },
   { path: '**', component: Client404Component }

@@ -31,6 +31,9 @@
     <div class="blog-header-2">某些租户导入自定义营销账单时不进行已有时间校验</div>
     <div class="blog-text-normal"><span class="blog-highlight-navy">enum_name = 'custom_marketing_import_trustworthy'</span> 用于取消某些租户导入自定义营销账单时的时间限制，利用 <span class="blog-highlight-navy">remark</span> （英文逗号分隔）字段控制具体值。</div>
     <app-code-display [code]="this.presetStatements[7]" language="sql"></app-code-display>
+    <div class="blog-header-2">为某些租户私有化公共规则</div>
+    <div class="blog-text-normal"><span class="blog-highlight-navy">enum_name = 'privatize_rules_for'</span> 用于为特定的租户私有化 <span class="blog-highlight-navy">version_no = 86</span> 标记的公共规则，利用 <span class="blog-highlight-navy">remark</span> （英文逗号分隔）字段控制具体值。</div>
+    <app-code-display [code]="this.presetStatements[8]" language="sql"></app-code-display>
   </div>
 </div>
 <div class="blog-end">(THE END)</div>
