@@ -45,7 +45,11 @@ WHERE enum_name = 'custom_marketing_import_trustworthy';`,
 
     `SELECT *
 FROM bill_enum
-WHERE enum_name = 'privatize_rules_for';`
+WHERE enum_name = 'privatize_rules_for';`,
+
+    `SELECT *
+FROM bill_enum
+WHERE enum_name = 'privatize_bill_manage_for';`
   ];
 
 }
